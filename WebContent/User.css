@@ -1,0 +1,34 @@
+@charset "UTF-8";
+body 
+ {
+    background-color: #990000;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+    text-decoration: none;
+ }
+ .header{
+	top: 84px;
+	left: 1000px;
+	width: 677px;
+	height: 214px;
+	font: Regular 161px/214px Segoe UI;
+	letter-spacing: 0;
+	color: #FFFFFF;
+	opacity: 1;
+ }
+ .button 
+ {	  background-color: #FFCC00;
+ 	  border-radius: 3px;
+ 	  width: 120px;
+ 	  height: 40px;
+ }
+ .guest-button{
+ 	  top: 341px;
+ }
+ .instructor-button{
+ 
+ 	  top: 341px;
+ }
+ .student-button{
+ 
+ 	  top: 341px;
+ }
