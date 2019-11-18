@@ -1,0 +1,31 @@
+@charset "UTF-8";
+body 
+{
+   background-color: #990000;
+   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+   text-decoration: none;
+}
+
+h1 {
+	border-style: solid;
+	border-radius: 3px;
+    border-color: #FFCC00;
+    color: #FFCC00;
+    border-width: 5px;
+    width: 30%;
+    text-align: center;
+    margin-top: 50px;
+}
+
+#signout
+{
+	  background-color: #FFCC00;
+	  width: 130px;
+	  height: 30px;
+	  margin-top: -100px;
+	  margin-left: 1200px;
+	  text-align: center;
+	  font-size: 20px;
+	  font-weight: bold;
+	  
+}
