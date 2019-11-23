@@ -21,12 +21,17 @@ public class StudentLoginServlet extends HttpServlet {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		
-		//Save in session
-		HttpSession session = request.getSession();
-		session.setAttribute("username", username);
-		session.setAttribute("password", password);
-						
-		RequestDispatcher rd = request.getRequestDispatcher("/Student.jsp");
-		rd.forward(request, response);
+		//***************
+				//PLEASE VALIDATE LOGIN AND ACTUALLY LOG IN
+				//use login() and verify()
+				//IF LOGIN SUCCESSFUL SAVE INSTRUCTOR NAME IN SESSION VARIABLE (SEE BELOW)
+					//HttpSession session = request.getSession();
+					//session.setAttribute("first_name", first_name);
+					RequestDispatcher rd = request.getRequestDispatcher("/Student.jsp");
+					rd.forward(request, response);
+				//ELSE KEEP ON LOGIN PAGE AND SHOW ERROR MESSAGE (BASICALLY HW3)
+					//RequestDispatcher rd = request.getRequestDispatcher("/StudentLogin.jsp");
+					//rd.forward(request, response);
 	}
 }
+
