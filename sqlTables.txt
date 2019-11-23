@@ -1,0 +1,45 @@
+create table instructor (
+instructorID,
+username,
+password,
+fName,
+lName
+);
+
+create table student (
+studentID,
+username,
+password,
+fName, 
+lName,
+strike
+);
+
+create table queue (
+index,
+stuentID,
+text,
+courseID
+);
+
+create table studentCourse(
+courseID,
+studentID
+);
+
+create table course (
+courseID,
+courseName
+);
+
+create table officeHour (
+courseID,
+day,
+hourStart,
+hourEnd
+);
+
+create table instructorCourse (
+courseID,
+instructorID
+);
