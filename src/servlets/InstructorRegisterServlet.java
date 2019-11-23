@@ -20,12 +20,13 @@ public class InstructorRegisterServlet extends HttpServlet {
 		//Get username and password from form
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
+		String first_name = request.getParameter("first_name");
+		String last_name = request.getParameter("last_name");
 		String confirmpw = request.getParameter("confirmpw");
 		
-		//Save in session
+
 		HttpSession session = request.getSession();
-		session.setAttribute("username", username);
-		session.setAttribute("password", password);
+		session.setAttribute("first_name", first_name);
 				
 		RequestDispatcher rd = request.getRequestDispatcher("/Instructor.jsp");
 		rd.forward(request, response);
