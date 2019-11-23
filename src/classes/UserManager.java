@@ -38,7 +38,7 @@ public class UserManager {
         }
     }
 
-    public static boolean verify(String username, String password){
+    public static boolean verify(String username, String password, int userType){
         Vector<Vector<String>> ans=new Vector<Vector<String>>();
         Connection conn = null;
         PreparedStatement ps = null;
