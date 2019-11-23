@@ -23,7 +23,6 @@ public class InstructorRegisterServlet extends HttpServlet {
 		String first_name = request.getParameter("first_name");
 		String last_name = request.getParameter("last_name");
 		String confirmpw = request.getParameter("confirmpw");
-		
 
 		HttpSession session = request.getSession();
 		session.setAttribute("first_name", first_name);
