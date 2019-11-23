@@ -48,28 +48,28 @@ public class CreateCourse extends HttpServlet {
 	        statement = "insert into instructorCourse (courseID, instructorID) values ( (select courseID from course where courseName=\"" + course + "\") ,"
 	            + "(select instructorID from instructor where username=\"" + username + "\"))"; 
 	        ps = conn.prepareStatement(statement);
-          ps.executeUpdate();
-            
-          // create new row for course in officeHour table 
-          statement = "insert into officeHour (courseID, day, hourStart, hourEnd) values ( (select courseID from course where courseName=\"" + course + "\") ,"
-                + "\'\', 0, 0)";
-          ps = conn.prepareStatement(statement);
-          ps.executeUpdate();
-            
-	      } catch (SQLException sqle) {
-            System.out.println(sqle.getMessage());
-        } finally {
-            try {
-                if (ps != null) {
-                    ps.close();
-                }
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (SQLException sqle) {
-                System.out.println(sqle.getMessage());
-            }
-        }
+		  ps.executeUpdate();
+
+		  // create new row for course in officeHour table 
+		  statement = "insert into officeHour (courseID, day, hourStart, hourEnd) values ( (select courseID from course where courseName=\"" + course + "\") ,"
+			+ "\'\', 0, 0)";
+		  ps = conn.prepareStatement(statement);
+		  ps.executeUpdate();
+
+		      } catch (SQLException sqle) {
+		    System.out.println(sqle.getMessage());
+		} finally {
+		    try {
+			if (ps != null) {
+			    ps.close();
+			}
+			if (conn != null) {
+			    conn.close();
+			}
+		    } catch (SQLException sqle) {
+			System.out.println(sqle.getMessage());
+		    }
+		}
 	    
 	      // forward to instructor jsp  
         RequestDispatcher dispatch = getServletContext().getRequestDispatcher("/Instructor.jsp");
