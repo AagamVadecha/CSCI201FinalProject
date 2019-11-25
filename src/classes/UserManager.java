@@ -38,7 +38,7 @@ public class UserManager {
         }
     }
 
-    public static boolean verify(String username, String password, int userType){
+    public static boolean verify(String username, String password){
         Vector<Vector<String>> ans=new Vector<Vector<String>>();
         Connection conn = null;
         PreparedStatement ps = null;
@@ -77,9 +77,8 @@ public class UserManager {
         return !ans.isEmpty();
     }
 
-    public static Vector<Vector<String>> login(String username, String password) {
-        Vector<Vector<String>> ans=new Vector<Vector<String>>();
-        if(verify(username, password,0)) {
+    public static ResultSet login(String username, String password) {
+        if(verify(username, password)) {
             Connection conn = null;
             PreparedStatement ps = null;
             ResultSet rs = null;
