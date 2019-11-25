@@ -62,7 +62,7 @@ function update(){
 
 <div id="queueInfo"> </div>
 
-<div id = "finishStudnet">
+<div id = "finishStudent">
 	<button type='button' onclick='nextStudent()'>Next Student</button>
 </div> 
 

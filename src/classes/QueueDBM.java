@@ -208,7 +208,7 @@ public class QueueDBM {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sql = "jdbc:mysql://google/OHScheduler" // TODO db name
+		String sql = "jdbc:mysql://google/OHScheduler"
 				+ "?cloudSqlInstance=zhoue-csci201l-lab7:us-central1:sql-db-lab7"
 				+ "&socketFactory=com.google.cloud.sql.mysql.SocketFactory" + "&useSSL=false"
 				+ "&user=zhoue&password=password1234";

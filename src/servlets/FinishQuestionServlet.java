@@ -36,7 +36,7 @@ public class FinishQuestionServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		int courseID = (int) session.getAttribute("courseID");
 		QueueManager.ejectQuestion(courseID,  -1); // -1 indicate remove 1st student
-		session.setAttribute("inQueue", false);
+		session.setAttribute("InQueue", false);
 	}
 
 	/**

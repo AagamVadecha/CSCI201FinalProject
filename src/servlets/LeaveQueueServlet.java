@@ -37,7 +37,7 @@ public class LeaveQueueServlet extends HttpServlet {
 		int courseID = (int) session.getAttribute("courseID");
 		int userID = (int) session.getAttribute("userID");
 	    
-	    session.setAttribute("inQueue", false);
+	    session.setAttribute("InQueue", false);
 	    QueueManager.cancelQuestion(courseID, userID);
 	}
 

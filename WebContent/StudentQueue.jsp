@@ -16,7 +16,7 @@ int queueNumber = GuestServlet.getQueue();
 
 <script>
 var xhttp = new XMLHttpRequest();
-xhttp.open("GET", 'CheckQueueServlet?', false);
+xhttp.open("GET", 'DisplayQueueServlet?', false);
 xhttp.send();
 
 if(xhttp.responseText.trim().length > 0){
@@ -82,7 +82,7 @@ else {
 %>
 
 <div id = "update">
-		<button type='button' onclick='update()'>Update Page</button>
+		<button type='button' onclick="return update();">Update Page</button>
 </div> 
 
 </body>

@@ -34,7 +34,10 @@ public class CreateCourse extends HttpServlet {
 	    Connection conn = null;
 	    Statement st = null; 
       // TODO - UPDATE WITH FINAL DATABASE
-	    String sql = "jdbc:mysql://google/Hmwk4Database?cloudSqlInstance=cs201-lab:us-central1:sql-db-2&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=root&password=111";
+	    String sql = "jdbc:mysql://google/OHScheduler"
+				+ "?cloudSqlInstance=zhoue-csci201l-lab7:us-central1:sql-db-lab7"
+				+ "&socketFactory=com.google.cloud.sql.mysql.SocketFactory" + "&useSSL=false"
+				+ "&user=zhoue&password=password1234";
 	    try {
 	        conn = DriverManager.getConnection(sql);
 	        st = conn.createStatement(); 

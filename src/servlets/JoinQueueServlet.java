@@ -33,7 +33,7 @@ public class JoinQueueServlet extends HttpServlet {
 		int courseID = (int) session.getAttribute("courseID");
 		int userID = (int) session.getAttribute("userID");
 	    String text = request.getParameter("comment");
-	    session.setAttribute("inQueue", true);
+	    session.setAttribute("InQueue", true);
 		//WHENEVER YOU FIGURE OUT LOGIN AND REGISTER SAVE THE FIRST NAME INTO THE SESSION VARIABLE
 	    // save userID
 		//PASS THIS VARIABLE TO joinQueue, REPLACE ELISE :)
