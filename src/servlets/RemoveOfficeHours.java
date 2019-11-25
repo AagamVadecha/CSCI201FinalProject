@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,15 +28,23 @@ public class RemoveOfficeHours extends HttpServlet {
     /* This servlet removes the specific hours for the course from the database 
      */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	    String day = request.getParameter("day");
-        String hourStart = request.getParameter("hourStart");
-        String hourEnd = request.getParameter("hourEnd");
+//	      String day = request.getParameter("day");
+//        String hourStart = request.getParameter("hourStart");
+//        String hourEnd = request.getParameter("hourEnd");
         HttpSession session = request.getSession(); 
-        String course = (String) session.getAttribute("courseName");
+//        String course = (String) session.getAttribute("courseName");
+//        String course = request.getParameter("name");
         
-        /*
-         * System.out.println(day); System.out.println(hourStart); System.out.println(hourEnd);
-         */
+        // begin menu implementation 
+        int index = Integer.parseInt(request.getParameter("value"));
+        ArrayList<ArrayList<String>> officeHours = (ArrayList<ArrayList<String>>) session.getAttribute("courses"); 
+        String course, day, hourStart, hourEnd; 
+        // get day, hourStart, hourEnd 
+        course = officeHours.get(0).get(index);
+        day = officeHours.get(1).get(index);
+        hourStart = officeHours.get(2).get(index);
+        hourEnd = officeHours.get(3).get(index);
+        // end menu implementation   
         
         PreparedStatement ps = null; 
         Connection conn = null;
