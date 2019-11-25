@@ -25,6 +25,19 @@ if(xhttp.responseText.trim().length > 0){
 else{
 	return;
 }
+
+
+function update(){
+	var xhttp = new XMLHttpRequest();
+	xhttp.open("GET", 'DisplayQueueServlet?', false);
+	xhttp.send();
+	if(xhttp.responseText.trim().length > 0){
+		document.getElementById("queueInfo").innerHTML =xhttp.responseText.trim();
+	}
+	else{
+		return;
+	}
+}
 </script>
 
 
@@ -64,11 +77,13 @@ else {
 	</div> 
 	
 	
-	<!-- <div id = "join">
-	<a href="servlet" style="color: #990000; text-decoration: none;">Join the queue</a>
-	</div> -->
 <%
 }
 %>
+
+<div id = "update">
+		<button type='button' onclick='update()'>Update Page</button>
+</div> 
+
 </body>
 </html>
