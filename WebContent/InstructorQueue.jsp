@@ -26,6 +26,34 @@ if(xhttp.responseText.trim().length > 0){
 else{
 	return;
 }
+
+function nextStudent(){
+	var xhttp = new XMLHttpRequest();
+	xhttp.open("GET", 'FinishQuestionServlet?', false);
+	xhttp.send();
+	update()
+
+}
+function noShow(){
+	var xhttp = new XMLHttpRequest();
+	xhttp.open("GET", 'NoShowServlet?', false);
+	xhttp.send();
+	update()
+
+}
+function update(){
+	var xhttp = new XMLHttpRequest();
+	xhttp.open("GET", 'DisplayQueueServlet?', false);
+	xhttp.send();
+	if(xhttp.responseText.trim().length > 0){
+		document.getElementById("queueInfo").innerHTML =xhttp.responseText.trim();
+	}
+	else{
+		return;
+	}
+}
+
+
 </script>
 <title>Instructor Office Hour Queue</title>
 </head>
@@ -35,23 +63,17 @@ else{
 <div id="queueInfo"> </div>
 
 <div id = "finishStudnet">
-		<form action="FinishQueueServlet">
-			<input type="submit" id="submit_button" value="Next Studnet">
-		</form>
+	<button type='button' onclick='nextStudent()'>Next Student</button>
 </div> 
 
 
 <div id = "noShow">
-		<form action="NoShowServlet">
-			<input type="submit" id="submit_button" value="Student No Show">
-		</form>
+		<button type='button' onclick='noShow()'>Student Not Showing Up</button>
 </div> 
 
 
 <div id = "update">
-		<form action="CheckQueueServlet">
-			<input type="submit" id="submit_button" value="Update Page">
-		</form>
+		<button type='button' onclick='update()'>Update Page</button>
 </div> 
 
 <div id = "end">
