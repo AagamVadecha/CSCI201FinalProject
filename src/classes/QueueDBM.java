@@ -8,6 +8,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 
+import zhoue_CSCI201L_Lab8.PageEntry;
+
 
 public class QueueDBM {
 /**
@@ -126,10 +128,9 @@ public class QueueDBM {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(sql);
-			String statement = ""; // TODO
-			ps = conn.prepareStatement(statement); 
-//			ps.setInt(1,  ++countValue);
-//			ps.setInt(2, pageID);
+			ps = conn.prepareStatement("delete from queue where courseID=? and studentID=?"); 
+			ps.setInt(1,  courseID);
+			ps.setInt(2, studentID);
 			ps.executeUpdate(); 
 		} catch (SQLException sqle) {
 			System.out.println(sqle.getMessage());
@@ -149,7 +150,8 @@ public class QueueDBM {
 		}
 	}
 	
-	public static Vector<Vector<String>> printTable(int courseID) {
+	// returns queue for specified course as vector w ea entry as username and text
+	public static Vector<Vector<String>> selectQueue(int courseID) {
 		Vector<Vector<String>> ans=new Vector<Vector<String>>();
 		Connection conn = null;
 		PreparedStatement ps = null;
@@ -161,11 +163,24 @@ public class QueueDBM {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(sql);
-			String statement = ""; // TODO
-			ps = conn.prepareStatement(statement); // prepare statement
-//			ps.setInt(1,  portNum);
-//			ps.setString(2, IPAddress);
-			rs = ps.executeQuery(); // execute query, return result set
+			ps = conn.prepareStatement("select * from queue where courseID=?"); // prepare statement
+			ps.setInt(1,  courseID);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				String text = rs.getString("text");
+				int studentID = rs.getInt("studentID");
+				// get username assoc w studentID
+				ps = conn.prepareStatement("select username from student where studentID=?"); // prepare statement
+				ps.setInt(1,  studentID);
+				rs = ps.executeQuery();
+				String username = null;
+				while (rs.next()) {
+					username = rs.getString("username");
+				}
+				Vector<String> entry = new Vector<>();
+				entry.add(username); entry.add(text);
+				ans.add(entry);
+			}
 		} catch (SQLException sqle) {
 			System.out.println(sqle.getMessage());
 		} catch (ClassNotFoundException e) {
@@ -189,7 +204,7 @@ public class QueueDBM {
 		return ans;
 	}
 	
-	public static void deleteTable(int courseID) {
+	public static void deleteQueue(int courseID) {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		String sql = "jdbc:mysql://google/ClientRecords" // TODO db name
@@ -199,10 +214,8 @@ public class QueueDBM {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(sql);
-			String statement = ""; // TODO
-			ps = conn.prepareStatement(statement); 
-//			ps.setInt(1,  ++countValue);
-//			ps.setInt(2, pageID);
+			ps = conn.prepareStatement("delete from queue where courseID=?"); 
+			ps.setInt(1,  courseID);
 			ps.executeUpdate(); 
 		} catch (SQLException sqle) {
 			System.out.println(sqle.getMessage());
@@ -233,8 +246,7 @@ public class QueueDBM {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(sql);
-			String statement = ""; // TODO
-			ps = conn.prepareStatement(statement); 
+			ps = conn.prepareStatement("update student set strike=strike+1 where studentID=?"); 
 //			ps.setInt(1,  ++countValue);
 //			ps.setInt(2, pageID);
 			ps.executeUpdate(); 

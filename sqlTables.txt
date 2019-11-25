@@ -1,45 +1,61 @@
-create table instructor (
-instructorID,
-username,
-password,
-fName,
-lName
+create database OHScheduler;
+use OHScheduler;
+
+
+create table instructor ( 
+instructorID INT(50) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+username VARCHAR(50) NOT NULL,
+password VARCHAR(50) NOT NULL,
+fName VARCHAR(50) NOT NULL, 
+lName VARCHAR(50) NOT NULL
 );
 
 create table student (
-studentID,
-username,
-password,
-fName, 
-lName,
-strike
-);
-
-create table queue (
-index,
-stuentID,
-text,
-courseID
-);
-
-create table studentCourse(
-courseID,
-studentID
+studentID INT(50) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+username VARCHAR(50) NOT NULL,
+password VARCHAR(50) NOT NULL,
+fName VARCHAR(50) NOT NULL, 
+lName VARCHAR(50) NOT NULL,
+strike INT(1) DEFAULT 0
 );
 
 create table course (
-courseID,
-courseName
+courseID INT(50) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+courseName VARCHAR(50) NOT NULL
 );
 
-create table officeHour (
-courseID,
-day,
-hourStart,
-hourEnd
+
+create table studentCourse(
+courseID INT(50) NOT NULL,
+studentID INT(50) NOT NULL,
+FOREIGN KEY (studentID) REFERENCES student(studentID),
+FOREIGN KEY (courseID) REFERENCES course(courseID)
 );
 
-create table instructorCourse (
-courseID,
-instructorID
+
+create table officeHour ( 
+courseID INT(50) NOT NULL,
+day VARCHAR(10) NOT NULL,
+hourStart INT(2) NOT NULL,
+hourEnd INT(2) NOT NULL,
+FOREIGN KEY (courseID) REFERENCES course(courseID)
+);
+
+create table instructorCourse ( 
+courseID INT(50) NOT NULL,
+instructorID INT(50) NOT NULL,
+FOREIGN KEY (courseID) REFERENCES course(courseID),
+FOREIGN KEY (instructorID) REFERENCES instructor(instructorID)
+);
+
+create table queue (
+studentID INT(50) NOT NULL,
+courseID INT(50) NOT NULL,
+text VARCHAR(200),
+FOREIGN KEY (studentID) REFERENCES student(studentID),
+FOREIGN KEY (courseID) REFERENCES course(courseID),
+time DATETIME PRIMARY KEY NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+create table testIncrement(
 );

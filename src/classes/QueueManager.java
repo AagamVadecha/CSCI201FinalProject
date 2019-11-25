@@ -12,7 +12,7 @@ public class QueueManager {
 	}
 
 	public static Vector<Vector<String>> printQueue(int courseID) {
-		return QueueDBM.printTable(courseID);
+		return QueueDBM.selectQueue(courseID);
 	}
 
 	public static void cancelQuestion(int courseID, int studentID) {
@@ -20,7 +20,7 @@ public class QueueManager {
 	}
 
 	public static void stopQueue(int courseID) {
-		QueueDBM.deleteTable(courseID);
+		QueueDBM.deleteQueue(courseID);
 	}
 
 //	public static void promoteQuestion(int courseID, int studentID) {
