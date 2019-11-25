@@ -57,17 +57,9 @@ FOREIGN KEY (courseID) REFERENCES course(courseID),
 time DATETIME PRIMARY KEY NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
-// TODO del
-create table testIncrement(
-strike INT(1) DEFAULT 0,
-note VARCHAR(10) NOT NULL
-);
-insert into testIncrement(note) values('test1');
-update testIncrement set strike=strike+1 where note='test1';
-drop table testIncrement;
 
 
-// notes
+// beth notes
 InstructorCalendar.jsp
 start click
 startQueueServlet.java

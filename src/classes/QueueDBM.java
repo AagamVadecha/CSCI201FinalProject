@@ -8,9 +8,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 
-import zhoue_CSCI201L_Lab8.PageEntry;
-
-
 public class QueueDBM {
 /**
 	public static void makeTable(int courseID) {
