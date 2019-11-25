@@ -4,7 +4,7 @@ import java.util.Vector;
 
 public class QueueManager {
 	public static void startQueue(int courseID) {
-		QueueDBM.makeTable(courseID);
+//		QueueDBM.makeTable(courseID);
 	}
 
 	public static void addQuestion(int courseID, int studentID, String text) {
@@ -23,9 +23,9 @@ public class QueueManager {
 		QueueDBM.deleteTable(courseID);
 	}
 
-	public static void promoteQuestion(int courseID, int studentID) {
-		QueueDBM.promoteEntry(courseID, studentID);
-	}
+//	public static void promoteQuestion(int courseID, int studentID) {
+//		QueueDBM.promoteEntry(courseID, studentID);
+//	}
 
 	public static void ejectQuestion(int courseID, int studentID) {
 		QueueDBM.deleteEntry(courseID, studentID);

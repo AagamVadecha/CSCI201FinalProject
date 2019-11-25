@@ -10,6 +10,7 @@ import java.util.Vector;
 
 
 public class QueueDBM {
+/**
 	public static void makeTable(int courseID) {
 		Connection conn = null;
 		PreparedStatement ps = null;
@@ -44,6 +45,7 @@ public class QueueDBM {
 			}
 		}
 	}
+	*/
 	
 	public static void insertEntry(int courseID, int studentID, String text) {
 		Connection conn = null;
@@ -55,10 +57,10 @@ public class QueueDBM {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(sql);
-			String statement = ""; // TODO
-			ps = conn.prepareStatement(statement); 
-//			ps.setInt(1,  ++countValue);
-//			ps.setInt(2, pageID);
+			ps = conn.prepareStatement("insert into queue(studentID, text, courseID) values(?, ?, ?)"); 
+			ps.setInt(1,  studentID);
+			ps.setString(2, text);
+			ps.setInt(3, courseID);
 			ps.executeUpdate(); 
 		} catch (SQLException sqle) {
 			System.out.println(sqle.getMessage());
@@ -78,6 +80,7 @@ public class QueueDBM {
 		}
 	}
 	
+	/**
 	public static void promoteEntry(int courseID, int studentID) {
 		Connection conn = null;
 		PreparedStatement ps = null;
@@ -110,7 +113,7 @@ public class QueueDBM {
 			}
 		}
 	}
-	
+	*/
 	
 	
 	public static void deleteEntry(int courseID, int studentID) {

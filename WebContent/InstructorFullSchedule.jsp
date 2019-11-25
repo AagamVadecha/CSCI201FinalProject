@@ -2,7 +2,7 @@
 /* IF U WANT MAKE A NEW FUNCTION TO DISPLAY ALL OF COURSE'S OFFICE HOURS
 OR USE DisplayCalendar IN A LOOP FOR ALL OF THIS COURSE'S OFFICE HOURS */
 String courseName= (String)session.getAttribute("courseName");
-System.out.println("couse name: " + courseName);
+System.out.println("course name: " + courseName);
 GuestServlet.DisplayCalendar(courseName);
 %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
