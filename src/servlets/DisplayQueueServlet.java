@@ -36,7 +36,7 @@ public class DisplayQueueServlet extends HttpServlet {
 		// TODO respond with queue information for specific courseID
 		// servlet called by ajax call
 		HttpSession session = request.getSession();
-		int courseID = (int) session.getAttribute("courseID");
+		int courseID = Integer.parseInt((String) session.getAttribute("courseID"));
 		response.getWriter().append(QueueManager.printQueue(courseID));
 		
 	}

@@ -29,14 +29,14 @@ function nextStudent(){
 	var xhttp = new XMLHttpRequest();
 	xhttp.open("GET", 'FinishQuestionServlet?', false);
 	xhttp.send();
-	update()
+	updateQueue();
 
 }
 function noShow(){
 	var xhttp = new XMLHttpRequest();
 	xhttp.open("GET", 'NoShowServlet?', false);
 	xhttp.send();
-	update()
+	updateQueue();
 
 }
 function updateQueue(){
