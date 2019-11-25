@@ -1,5 +1,7 @@
 package servlets;
 
+import classes.UserManager;
+
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
@@ -16,17 +18,26 @@ import javax.servlet.http.HttpSession;
 @WebServlet("/StudentRegisterServlet")
 public class StudentRegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	protected void service (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void service (HttpServletRequest request, HttpServletResponse response, HttpSession session) throws ServletException, IOException {
 		//Get username and password from form
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		String first_name = request.getParameter("first_name");
 		String last_name = request.getParameter("last_name");
 		String confirmpw = request.getParameter("confirmpw");
-		
+
+		if(confirmpw.trim().equals(password.trim())){
+			if(UserManager.register(username,password,first_name,last_name,1)){
+				session.
+
+			}else{
+				RequestDispatcher rd = request.getRequestDispatcher("/StudentRegister.jsp");
+				rd.forward(request, response);
+			}
+		}
+
 		HttpSession session = request.getSession();
 		session.setAttribute("first_name", first_name);
-		
 		//***************
 		//PLEASE VALIDATE LOGIN AND ACTUALLY LOG IN
 		//use login() and verify()

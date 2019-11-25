@@ -4,7 +4,7 @@ import java.sql.*;
 import java.util.Vector;
 
 public class UserManager {
-    public static void register(){
+    public static void register(String username, String password, String fname, String lname, int id){
         //going to Use Elizabeth's SQL code
         Connection conn = null;
         PreparedStatement ps = null;
