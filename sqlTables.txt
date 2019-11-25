@@ -57,5 +57,33 @@ FOREIGN KEY (courseID) REFERENCES course(courseID),
 time DATETIME PRIMARY KEY NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
+// TODO del
 create table testIncrement(
+strike INT(1) DEFAULT 0,
+note VARCHAR(10) NOT NULL
 );
+insert into testIncrement(note) values('test1');
+update testIncrement set strike=strike+1 where note='test1';
+drop table testIncrement;
+
+
+// notes
+InstructorCalendar.jsp
+start click
+startQueueServlet.java
+forward
+InstructorQueue.jsp
+	buttons end, finish student, no show, update
+	each of 1st three fxnality goes to diff servlet
+	end
+		clicking end returns to InstructorCalendar.jsp
+		
+StudentCalendar.jsp
+	check queue button
+		goes to checkQueueServlet.java
+		forward StudentQueue.jsp
+SQ.jsp
+	post button
+	leave button
+		directed back to StudentCalendar.jsp
+		

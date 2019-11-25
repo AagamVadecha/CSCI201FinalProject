@@ -5,6 +5,7 @@ import java.util.Vector;
 public class QueueManager {
 	public static void startQueue(int courseID) {
 //		QueueDBM.makeTable(courseID);
+		return;
 	}
 
 	public static void addQuestion(int courseID, int studentID, String text) {
@@ -36,3 +37,5 @@ public class QueueManager {
 	}
 
 }
+
+

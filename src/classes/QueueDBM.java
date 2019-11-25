@@ -247,8 +247,6 @@ public class QueueDBM {
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(sql);
 			ps = conn.prepareStatement("update student set strike=strike+1 where studentID=?"); 
-//			ps.setInt(1,  ++countValue);
-//			ps.setInt(2, pageID);
 			ps.executeUpdate(); 
 		} catch (SQLException sqle) {
 			System.out.println(sqle.getMessage());
