@@ -3,6 +3,15 @@ String courseName= (String)session.getAttribute("courseName");
 System.out.println("couse name: " + courseName);
 int queueNumber = GuestServlet.getQueue();
 GuestServlet.DisplayCalendar(courseName);
+session.setAttribute("checkType", "student");
+
+
+
+
+
+//to be deleted later
+session.setAttribute("userID", "0");
+session.setAttribute("courseID", "0");
 %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.ArrayList" import="servlets.GuestServlet"%>
@@ -20,30 +29,10 @@ GuestServlet.DisplayCalendar(courseName);
 <p id="signout">
 <a href="servlet" style="color: #990000; text-decoration: none;" > Sign Out</a>
 </p>
+<p id="checkQueue">
+<a href="CheckQueueServlet" style="color: #990000; text-decoration: none;" > Check Queue Detail</a>
+</p>
 
-<!-- ADD/REMOVE FROM QUEUE -->
-<%
-//if the user is already in the queue show Remove From Queue
-String check  = (String)request.getSession().getAttribute("queueStatus");
-if(request.getSession().getAttribute("queueStatus") == "InQueue")
- { %>
-	<div id = "remove" >
-	<a href="servlet" style="color: #990000; text-decoration: none;">Remove from queue</a>
-	</div>
-<%}
-else { 
-%>
-	<div id = "join">
-		<form action="GuestServlet">
-			<input type="text" name="comment" value="Add Comment Here" id="commentbox"><br>
-			<input type="submit" id="submit_button" value="JOIN QUEUE">
-		</form>
-	</div> 
-	<!-- <div id = "join">
-	<a href="servlet" style="color: #990000; text-decoration: none;">Join the queue</a>
-	</div> -->
-<%
-}
-%>
+
 </body>
 </html>

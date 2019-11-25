@@ -2,8 +2,12 @@
 String courseName= (String)session.getAttribute("courseName");
 System.out.println("couse name: " + courseName);
 GuestServlet.DisplayCalendar(courseName);
-
 session.setAttribute("nextPage", "InstructorCalendar.jsp");
+
+
+//tobe deleted later
+session.setAttribute("userID", "0");
+session.setAttribute("courseID", "0");
 %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.ArrayList" import="servlets.GuestServlet"%>
@@ -18,7 +22,7 @@ session.setAttribute("nextPage", "InstructorCalendar.jsp");
 <body>
 <h1>Instructor <%= courseName %> Calendar</h1>
 <div id="start">
-<button><a href = "StartOfficeHoursServlet" style="color: #990000; text-decoration: none;">Start</a></button></div>
+<button onclick="window.location.href = 'StartQueueServlet';" style="color: #990000; text-decoration: none;">Start Office Hour Now</button></div>
 
 <div id = "hours">
 		<form action="AddOfficeHours">
