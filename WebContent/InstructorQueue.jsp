@@ -17,15 +17,13 @@ session.setAttribute("checkType", "instructor");
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
 var xhttp = new XMLHttpRequest();
-xhttp.open("GET", 'CheckQueueServlet?', false);
+xhttp.open("GET", 'DisplayQueueServlet?', false);
 xhttp.send();
 
 if(xhttp.responseText.trim().length > 0){
 	document.getElementById("queueInfo").innerHTML =xhttp.responseText.trim();
 }
-else{
-	return;
-}
+
 
 function nextStudent(){
 	var xhttp = new XMLHttpRequest();
@@ -41,7 +39,7 @@ function noShow(){
 	update()
 
 }
-function update(){
+function updateQueue(){
 	var xhttp = new XMLHttpRequest();
 	xhttp.open("GET", 'DisplayQueueServlet?', false);
 	xhttp.send();
@@ -73,7 +71,7 @@ function update(){
 
 
 <div id = "update">
-		<button type='button' onclick='update()'>Update Page</button>
+		<button type='button' onclick='updateQueue()'>Update Page</button>
 </div> 
 
 <div id = "end">
