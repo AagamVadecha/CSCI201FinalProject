@@ -8,8 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import classes.QueueManager;
+
 /**
- * Servlet implementation class JoinQueueServlet
+ * Servlet implementation class QueueServlet
  */
 @WebServlet("/JoinQueueServlet")
 public class JoinQueueServlet extends HttpServlet {
@@ -31,7 +33,7 @@ public class JoinQueueServlet extends HttpServlet {
 		String courseName = (String) session.getAttribute("courseName");
 		//WHENEVER YOU FIGURE OUT LOGIN AND REGISTER SAVE THE FIRST NAME INTO THE SESSION VARIABLE
 		//PASS THIS VARIABLE TO joinQueue, REPLACE ELISE :)
-	    joinQueue("elise",courseName,comment);
+	    QueueManager.addQuestion(courseID, studentID, text);
 		
 	}
 	
