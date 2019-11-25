@@ -6,6 +6,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import classes.QueueManager;
 
 /**
  * Servlet implementation class LeaveQueueServlet
@@ -28,6 +31,14 @@ public class LeaveQueueServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Delete studnet question in DB
 		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		// called by ajax call
+		HttpSession session = request.getSession();
+		int courseID = (int) session.getAttribute("courseID");
+		int userID = (int) session.getAttribute("userID");
+	    
+	    session.setAttribute("inQueue", false);
+	    QueueManager.cancelQuestion(courseID, userID);
 	}
 
 	/**

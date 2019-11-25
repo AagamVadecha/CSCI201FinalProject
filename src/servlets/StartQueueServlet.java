@@ -1,6 +1,8 @@
 package servlets;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -26,8 +28,11 @@ public class StartQueueServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Add question to Queue DB
+		// from clicking start button in InstructorCalendar.jsp
+		// forwards to InstructorQueue.jsp
 		response.getWriter().append("Served at: ").append(request.getContextPath());
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/InstructorQueue.jsp");
+		dispatcher.forward(request, response);
 	}
 
 	/**

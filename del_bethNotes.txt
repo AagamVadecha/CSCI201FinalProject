@@ -58,3 +58,42 @@ time DATETIME PRIMARY KEY NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 
+
+// beth notes
+InstructorCalendar.jsp
+	start click
+		-StartQueueServlet.java
+			delete 	StartOfficeHourServlet.java
+			forward InstructorQueue.jsp
+InstructorQueue.jsp
+	buttons end, finish question, no show, update
+	each of 1st three fxnality goes to diff servlet
+	finish question
+		return to InstructorQueue
+	end
+		clicking end returns to InstructorCalendar.jsp
+		
+StudentCalendar.jsp
+	check queue button
+		goes to checkQueueServlet.java
+		forward StudentQueue.jsp
+		
+SQ.jsp
+	post button
+	leave button
+		directed back to StudentCalendar.jsp
+		
+session variable userID, courseID
+		
+questions
+which servlet/ fxn checks for student status in queue
+		
+		
+		set session variable
+		InQueue boolean true or false
+		if in queue = 
+		joinQueue 
+				set InQueue = true;
+		leaveQueue, 
+			set to false
+	

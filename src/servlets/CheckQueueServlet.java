@@ -1,11 +1,17 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.Vector;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import classes.QueueManager;
 
 /**
  * Servlet implementation class CheckQueueServlet
@@ -25,9 +31,12 @@ public class CheckQueueServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO respond with queue information with student ID and courseID as parameter 
-		//And then foward to StudentQueue.jsp
 		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		// to display queue, ajax call to DisplayQueueServlet
+		//forward to StudentQueue.jsp
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/StudentQueue.jsp");
+		dispatcher.forward(request, response);
 	}
 
 	/**

@@ -12,7 +12,7 @@ public class QueueManager {
 		QueueDBM.insertEntry(courseID, studentID, text);
 	}
 
-	public static Vector<Vector<String>> printQueue(int courseID) {
+	public static String printQueue(int courseID) {
 		return QueueDBM.selectQueue(courseID);
 	}
 
@@ -31,9 +31,13 @@ public class QueueManager {
 	public static void ejectQuestion(int courseID, int studentID) {
 		QueueDBM.deleteEntry(courseID, studentID);
 	}
-
+	
 	public static void blacklist(int studentID) {
 		QueueDBM.addStrike(studentID);
+	}
+	
+	public static void blacklistTopStudent(int courseID) {
+		QueueDBM.addStrike(QueueDBM.getTopStudentID(courseID));
 	}
 
 }

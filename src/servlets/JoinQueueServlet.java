@@ -28,19 +28,24 @@ public class JoinQueueServlet extends HttpServlet {
 	
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	//STUDENT COMMENT
-	    String comment = request.getParameter("comment");
+		// called by ajax call
 		HttpSession session = request.getSession();
-		String courseName = (String) session.getAttribute("courseName");
+		int courseID = (int) session.getAttribute("courseID");
+		int userID = (int) session.getAttribute("userID");
+	    String text = request.getParameter("comment");
+	    session.setAttribute("inQueue", true);
 		//WHENEVER YOU FIGURE OUT LOGIN AND REGISTER SAVE THE FIRST NAME INTO THE SESSION VARIABLE
+	    // save userID
 		//PASS THIS VARIABLE TO joinQueue, REPLACE ELISE :)
-	    QueueManager.addQuestion(courseID, studentID, text);
+	    QueueManager.addQuestion(courseID, userID, text);
+	    
 		
 	}
 	
-	//STUDENT CLICKS  JOIN QUEUE
-	public static void joinQueue(String name, String courseName, String comment)
-	{
-		//INSERT INTO QUEUE DATABASE
-	}
+//	//STUDENT CLICKS  JOIN QUEUE
+//	public static void joinQueue(String name, String courseName, String comment)
+//	{
+//		//INSERT INTO QUEUE DATABASE
+//	}
 
 }

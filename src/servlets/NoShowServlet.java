@@ -6,6 +6,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import classes.QueueManager;
 
 /**
  * Servlet implementation class NoShowServlet
@@ -26,8 +29,14 @@ public class NoShowServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Delete studnet question in DB and Add Strike to User table
+		// TODO Delete top studnet question in DB and Add Strike to User table
+		// called by ajax call from InstructorQueue.jsp
 		response.getWriter().append("Served at: ").append(request.getContextPath());
+		HttpSession session = request.getSession();
+		int courseID = (int) session.getAttribute("courseID");
+		QueueManager.blacklistTopStudent(courseID);
+		QueueManager.ejectQuestion(courseID,  -1); // -1 indicate remove 1st student
+		
 	}
 
 	/**
