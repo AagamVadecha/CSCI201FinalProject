@@ -22,12 +22,10 @@ xhttp.send();
 if(xhttp.responseText.trim().length > 0){
 	document.getElementById("queueInfo").innerHTML =xhttp.responseText.trim();
 }
-else{
-	return;
-}
 
 
-function update(){
+
+function updateQueue(){
 	var xhttp = new XMLHttpRequest();
 	xhttp.open("GET", 'DisplayQueueServlet?', false);
 	xhttp.send();
@@ -82,7 +80,9 @@ else {
 %>
 
 <div id = "update">
-		<button type='button' onclick="return update();">Update Page</button>
+
+
+		<button type='button' onclick='updateQueue()'>Update Page</button>
 </div> 
 
 </body>
