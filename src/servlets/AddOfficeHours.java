@@ -34,7 +34,7 @@ public class AddOfficeHours extends HttpServlet {
 		String hourStart = request.getParameter("hourStart");
 		String hourEnd = request.getParameter("hourEnd");
 		HttpSession session = request.getSession(); 
-		String course = (String) session.getAttribute("courseName");
+		int courseID =  (int) session.getAttribute("courseID");
 		
         /*
          * System.out.println(day); System.out.println(hourStart); System.out.println(hourEnd);
@@ -46,18 +46,20 @@ public class AddOfficeHours extends HttpServlet {
         ResultSet rs = null;
         
         // TODO - UPDATE WITH FINAL DATABASE
+        //String sql = "jdbc:mysql://google/Hmwk4Database?cloudSqlInstance=cs201-lab:us-central1:sql-db-2&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=root&password=111";
+        
         String sql = "jdbc:mysql://google/OHScheduler"
-				+ "?cloudSqlInstance=zhoue-csci201l-lab7:us-central1:sql-db-lab7"
-				+ "&socketFactory=com.google.cloud.sql.mysql.SocketFactory" + "&useSSL=false"
-				+ "&user=zhoue&password=password1234";
+            + "?cloudSqlInstance=zhoue-csci201l-lab7:us-central1:sql-db-lab7"
+            + "&socketFactory=com.google.cloud.sql.mysql.SocketFactory" + "&useSSL=false"
+            + "&user=zhoue&password=password1234";
         
         try {
             conn = DriverManager.getConnection(sql);
             st = conn.createStatement(); 
             
             // insert office hours into database  
-            String statement = "insert into officeHour (courseID, day, hourStart, hourEnd) values ((select courseID from course where courseName=\'" + course + "\')," 
-                + day +"," + hourStart + "," + hourEnd + ")"; 
+            String statement = "insert into officeHour (courseID, day, hourStart, hourEnd) values (" + courseID + ",\'" 
+                + day +"\'," + hourStart + "," + hourEnd + ")"; 
             
             ps = conn.prepareStatement(statement);
             ps.executeUpdate(statement);
