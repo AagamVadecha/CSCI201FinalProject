@@ -2,7 +2,7 @@
 String courseName = (String)session.getAttribute("courseName");
 int courseID = (int) session.getAttribute("courseID");
 System.out.println("course name: " + courseName);
-ArrayList<String> courseOH = CourseManager.getOfficeHoursCourse(courseID);
+//ArrayList<String> courseOH = CourseManager.getOfficeHoursCourse(courseID);
 //session.setAttribute("nextPage", "InstructorCalendar.jsp");
 
 // FIX PARSING THE courseOH ARRAY LIST 

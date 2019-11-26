@@ -19,54 +19,54 @@ public class UserManager {
             String statement = "";
             String statement1 = "SELECT * FROM instructor where username = ?";
             String statement2 = "SELECT * FROM student where username = ?";
-            ps = conn.prepareStatement(statement1);
-            ps.setString(1,username);
-            ResultSet rs = ps.executeQuery();
-            if(rs.next()) {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (ps != null) {
-                    ps.close();
-                }
-                if (conn != null) {
-                    conn.close();
-                }
-                return false;
-            }
-            if (rs != null) {
-                rs.close();
-            }
-            if (ps != null) {
-                ps.close();
-            }
-            if (conn != null) {
-                conn.close();
-            }
-            ps = conn.prepareStatement(statement2);
-            ps.setString(1,username);
-            rs = ps.executeQuery();
-            if(rs.next()) {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (ps != null) {
-                    ps.close();
-                }
-                if (conn != null) {
-                    conn.close();
-                }
-                return false;
-            }
-            if (rs != null) {
-                rs.close();
-            }
-            if (ps != null) {
-                ps.close();
-            }
-            if (conn != null) {
-                conn.close();
-            }
+//            ps = conn.prepareStatement(statement1);
+//            ps.setString(1,username);
+//            ResultSet rs = ps.executeQuery();
+//            if(rs.next()) {
+//                if (rs != null) {
+//                    rs.close();
+//                }
+//                if (ps != null) {
+//                    ps.close();
+//                }
+//                if (conn != null) {
+//                    conn.close();
+//                }
+//                return false;
+//            }
+//            if (rs != null) {
+//                rs.close();
+//            }
+//            if (ps != null) {
+//                ps.close();
+//            }
+//            if (conn != null) {
+//                conn.close();
+//            }
+//            ps = conn.prepareStatement(statement2);
+//            ps.setString(1,username);
+//            rs = ps.executeQuery();
+//            if(rs.next()) {
+//                if (rs != null) {
+//                    rs.close();
+//                }
+//                if (ps != null) {
+//                    ps.close();
+//                }
+//                if (conn != null) {
+//                    conn.close();
+//                }
+//                return false;
+//            }
+//            if (rs != null) {
+//                rs.close();
+//            }
+//            if (ps != null) {
+//                ps.close();
+//            }
+//            if (conn != null) {
+//                conn.close();
+//            }
             if (id == 2)
                 statement = "INSERT INTO instructor(username,password,fName,lName) VALUES(?,?,?,?)";
             else if (id == 1)
