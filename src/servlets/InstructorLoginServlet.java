@@ -1,6 +1,9 @@
 package servlets;
 
+import classes.UserManager;
+
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -21,6 +24,21 @@ public class InstructorLoginServlet extends HttpServlet {
 		//Get username and password from form
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
+		HttpSession session = request.getSession();
+		if(UserManager.verify(username,password)){
+			ArrayList<String> temp = UserManager.login(username,password);
+			session.setAttribute("userType", "student");
+			session.setAttribute("id", temp.get(0));
+			session.setAttribute("first_name", temp.get(3));
+			session.setAttribute("last_name", temp.get(4));
+			session.setAttribute("username",temp.get(1));
+			session.setAttribute("password",temp.get(2));
+			RequestDispatcher rd = request.getRequestDispatcher("/Instructor.jsp");
+			rd.forward(request, response);
+		}else{
+			RequestDispatcher rd = request.getRequestDispatcher("/InstructorLogin.jsp");
+			rd.forward(request, response);
+		}
 		
 		
 		//***************
@@ -29,8 +47,8 @@ public class InstructorLoginServlet extends HttpServlet {
 		//IF LOGIN SUCCESSFUL SAVE INSTRUCTOR NAME IN SESSION VARIABLE (SEE BELOW)
 			//HttpSession session = request.getSession();
 			//session.setAttribute("first_name", first_name);
-			RequestDispatcher rd = request.getRequestDispatcher("/Instructor.jsp");
-			rd.forward(request, response);
+//			RequestDispatcher rd = request.getRequestDispatcher("/Instructor.jsp");
+//			rd.forward(request, response);
 		//ELSE KEEP ON LOGIN PAGE AND SHOW ERROR MESSAGE (BASICALLY HW3)
 			//RequestDispatcher rd = request.getRequestDispatcher("/InstructorLogin.jsp");
 			//rd.forward(request, response);

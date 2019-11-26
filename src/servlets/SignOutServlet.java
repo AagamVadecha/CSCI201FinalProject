@@ -21,8 +21,9 @@ public class SignOutServlet extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SignOutServlet() {
-        super();
+    public SignOutServlet(HttpSession session) {
+//        super();
+        session.invalidate();
         // TODO Auto-generated constructor stub
     }
 
@@ -30,7 +31,7 @@ public class SignOutServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession(); 
+		HttpSession session = request.getSession();
 		session.invalidate(); //destroy a session
 		response.sendRedirect("HomePage.jsp");
 		System.out.println("signed out");
