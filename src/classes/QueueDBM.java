@@ -208,14 +208,14 @@ public class QueueDBM {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sql = "jdbc:mysql://google/OHScheduler"
-				+ "?cloudSqlInstance=zhoue-csci201l-lab7:us-central1:sql-db-lab7"
+		String sql = "jdbc:mysql://google/OHScheduler" + "?cloudSqlInstance=zhoue-csci201l-lab7:us-central1:sql-db-lab7"
 				+ "&socketFactory=com.google.cloud.sql.mysql.SocketFactory" + "&useSSL=false"
 				+ "&user=zhoue&password=password1234";
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(sql);
-			ps = conn.prepareStatement("select studentID from queue where courseID=? order by time limit 1"); // prepare statement
+			ps = conn.prepareStatement("select studentID from queue where courseID=? order by time limit 1"); // prepare
+																												// statement
 			ps.setInt(1, courseID);
 			rs = ps.executeQuery();
 			if (rs.next()) {
@@ -243,30 +243,50 @@ public class QueueDBM {
 
 		return studentID;
 	}
-	
-	public static Vector<String> getTopStudentInfo(int courseID) {
-		int studentID = getTopStudentID(courseID);
+
+	public static Vector<String> getSecondStudentInfo(int courseID) {
 		Vector<String> info = new Vector<>();
-		String username = ""; String fName = "";
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sql = "jdbc:mysql://google/OHScheduler"
-				+ "?cloudSqlInstance=zhoue-csci201l-lab7:us-central1:sql-db-lab7"
+		String sql = "jdbc:mysql://google/OHScheduler" + "?cloudSqlInstance=zhoue-csci201l-lab7:us-central1:sql-db-lab7"
 				+ "&socketFactory=com.google.cloud.sql.mysql.SocketFactory" + "&useSSL=false"
 				+ "&user=zhoue&password=password1234";
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(sql);
-	
+
+			// get courseName
+			ps = conn.prepareStatement("select courseName from course where courseID=?"); 
+			ps.setInt(1, courseID);
+			rs = ps.executeQuery();
+			String courseName = "";
+			if (rs.next()) {
+				courseName = rs.getString("courseName");
+			}
+			
+			// get studentID for 2nd in line
+			ps = conn.prepareStatement("select studentID from queue where courseID=? order by time limit 2"); // prepare
+			ps.setInt(1, courseID);
+			rs = ps.executeQuery();
+			int studentID = -1;
+			if (rs.next() && rs.next()) {
+				studentID = rs.getInt("studentID");
+			}
+
+			// if only <2 students in queue, not send email
+			if (studentID == -1) {
+				return null;
+			}
 			ps = conn.prepareStatement("select * from student where studentID=?"); // prepare statement
 			ps.setInt(1, studentID);
 			rs = ps.executeQuery();
 			if (rs.next()) {
-				username = rs.getString("username");
-				fName = rs.getString("fName");
-				info.add(username); info.add(fName);
+				info.add(rs.getString("username"));
+				info.add(rs.getString("fName"));
+				info.add(courseName);
 			}
+
 		} catch (SQLException sqle) {
 			System.out.println(sqle.getMessage());
 		} catch (ClassNotFoundException e) {

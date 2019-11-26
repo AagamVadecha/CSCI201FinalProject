@@ -40,8 +40,8 @@ public class QueueManager {
 		QueueDBM.addStrike(QueueDBM.getTopStudentID(courseID));
 	}
 	
-	public static Vector<String> getTopStudentInfo(int courseID){
-		return QueueDBM.getTopStudentInfo(courseID);
+	public static Vector<String> getSecondStudentInfo(int courseID){
+		return QueueDBM.getSecondStudentInfo(courseID);
 	}
 
 }
