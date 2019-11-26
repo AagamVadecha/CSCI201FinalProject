@@ -25,7 +25,7 @@ public class StudentRegisterServlet extends HttpServlet {
 		String password = request.getParameter("password");
 		String first_name = request.getParameter("first_name");
 		String last_name = request.getParameter("last_name");
-		String confirmpw = request.getParameter("confirmpw");
+		String confirmpw = request.getParameter("confirmpassword");
 
 		if(confirmpw.trim().equals(password.trim())) {
 			if (UserManager.register(username, password, first_name, last_name, 1)) {
