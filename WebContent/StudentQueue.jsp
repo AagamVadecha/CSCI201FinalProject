@@ -56,16 +56,8 @@ function updateQueue(){
 <!-- ADD/REMOVE FROM QUEUE -->
 <%
 //if the user is already in the queue show Remove From Queue
-if((boolean)request.getSession().getAttribute("InQueue"))
- { %>
-	<div id = "leave">
-		<form action="LeaveQueueServlet">
-			<input type="submit" id="submit_button" value="LEAVE QUEUE">
-		</form>
-	</div> 
-<%}
-else { 
-%>
+if(request.getSession().getAttribute("InQueue")==null || !(boolean)request.getSession().getAttribute("InQueue")){
+	%>
 	<div id = "join">
 		<form action="JoinQueueServlet">
 			<input type="text" name="comment" value="Add Comment Here" id="commentbox"><br>
@@ -74,8 +66,17 @@ else {
 	</div> 
 	
 	
-<%
+	<%
 }
+else 
+ { %>
+	<div id = "leave">
+		<form action="LeaveQueueServlet">
+			<input type="submit" id="submit_button" value="LEAVE QUEUE">
+		</form>
+	</div> 
+<%}
+
 %>
 
 <div id = "update">
