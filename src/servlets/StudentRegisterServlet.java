@@ -3,6 +3,7 @@ package servlets;
 import classes.UserManager;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -26,17 +27,22 @@ public class StudentRegisterServlet extends HttpServlet {
 		String last_name = request.getParameter("last_name");
 		String confirmpw = request.getParameter("confirmpw");
 
-		if(confirmpw.trim().equals(password.trim())){
-			if(UserManager.register(username,password,first_name,last_name,1)){
-				session.setAttribute("username",username);
-				session.setAttribute("password",password);
-				session.setAttribute("first_name",first_name);
+		if(confirmpw.trim().equals(password.trim())) {
+			if (UserManager.register(username, password, first_name, last_name, 1)) {
+				ArrayList<String> temp = UserManager.login(username, password,1);
+				session.setAttribute("userType", "student");
+				session.setAttribute("id", temp.get(0));
+				session.setAttribute("first_name", temp.get(3));
+				session.setAttribute("last_name", temp.get(4));
+				session.setAttribute("username", temp.get(1));
+				session.setAttribute("password", temp.get(2));
+				session.setAttribute("strikes", temp.get(5));
 				RequestDispatcher rd = request.getRequestDispatcher("/Student.jsp");
 				rd.forward(request, response);
-			}else{
+			}
+		}
 				RequestDispatcher rd = request.getRequestDispatcher("/StudentRegister.jsp");
 				rd.forward(request, response);
-			}
 		}
 
 //		HttpSession session = request.getSession();
@@ -52,5 +58,4 @@ public class StudentRegisterServlet extends HttpServlet {
 		//ELSE KEEP ON LOGIN PAGE AND SHOW ERROR MESSAGE (BASICALLY HW3)
 			//RequestDispatcher rd = request.getRequestDispatcher("/StudentLogin.jsp");
 			//rd.forward(request, response);;
-	}
 }
