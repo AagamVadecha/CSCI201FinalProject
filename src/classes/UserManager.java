@@ -1,10 +1,11 @@
 package classes;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Vector;
 
 public class UserManager {
-    public static void register(String username, String password, String fname, String lname, int id){
+    public static boolean register(String username, String password, String fname, String lname, int id) {
         //going to Use Elizabeth's SQL code
         Connection conn = null;
         PreparedStatement ps = null;
@@ -15,10 +16,28 @@ public class UserManager {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             conn = DriverManager.getConnection(sql);
-            String statement = ""; // TODO
+            String statement = "";
+            String statement1 = "SELECT * FROM instructor where username = ?";
+            String statement2 = "SELECT * FROM student where username = ?";
+            ps = conn.prepareStatement(statement1);
+            ps.setString(1,username);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next())
+                return false;
+            ps = conn.prepareStatement(statement2);
+            ps.setString(1,username);
+            rs = ps.executeQuery();
+            if(rs.next())
+                return false;
+            if (id == 2)
+                statement = "INSERT INTO instructor(username,password,fName,lName) VALUES(?,?,?,?)";
+            else if (id == 1)
+                statement = "INSERT INTO student(username,password,fName,lName) VALUES(?,?,?,?)";
             ps = conn.prepareStatement(statement);
-//			ps.setInt(1,  ++countValue);
-//			ps.setInt(2, pageID);
+            ps.setString(1, username);
+            ps.setString(2, password);
+            ps.setString(3, fname);
+            ps.setString(4, lname);
             ps.executeUpdate();
         } catch (SQLException sqle) {
             System.out.println(sqle.getMessage());
@@ -36,6 +55,7 @@ public class UserManager {
                 System.out.println(sqle.getMessage());
             }
         }
+        return true;
     }
 
     public static boolean verify(String username, String password){
@@ -77,22 +97,23 @@ public class UserManager {
         return !ans.isEmpty();
     }
 
-    public static ResultSet login(String username, String password) {
+    public static ArrayList<String> login(String username, String password) {
+        ArrayList<String> ans= new ArrayList<String>();
         if(verify(username, password)) {
             Connection conn = null;
             PreparedStatement ps = null;
             ResultSet rs = null;
             String sql = "jdbc:mysql://google/ClientRecords" // TODO db name
                     + "?cloudSqlInstance=zhoue-csci201l-lab7:us-central1:sql-db-lab7"
-                    + "&socketFactory=com.google.cloud.sql.mysql.SocketFactory" + "&useSSL=false"
+                    + "&socketFactory=com.go;ogle.cloud.sql.mysql.SocketFactory" + "&useSSL=false"
                     + "&user=zhoue&password=password1234";
             try {
                 Class.forName("com.mysql.jdbc.Driver");
                 conn = DriverManager.getConnection(sql);
-                String statement = ""; // TODO
+                String statement = "SELECT * FROM instructor where username = ?  AND password = ?"; // TODO
                 ps = conn.prepareStatement(statement); // prepare statement
-//			ps.setInt(1,  portNum);
-//			ps.setString(2, IPAddress);
+                ps.setString(1, username);
+                ps.setString(2,password);
                 rs = ps.executeQuery(); // execute query, return result set
             } catch (SQLException sqle) {
                 System.out.println(sqle.getMessage());

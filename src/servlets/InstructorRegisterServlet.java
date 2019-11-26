@@ -1,5 +1,7 @@
 package servlets;
 
+import classes.UserManager;
+
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
@@ -24,10 +26,17 @@ public class InstructorRegisterServlet extends HttpServlet {
 		String last_name = request.getParameter("last_name");
 		String confirmpw = request.getParameter("confirmpw");
 
-		HttpSession session = request.getSession();
-		session.setAttribute("first_name", first_name);
-				
-		RequestDispatcher rd = request.getRequestDispatcher("/Instructor.jsp");
-		rd.forward(request, response);
+		if(confirmpw.trim().equals(password.trim())){
+			if(UserManager.register(username,password,first_name,last_name,2)){
+				session.setAttribute("username",username);
+				session.setAttribute("password",password);
+				session.setAttribute("first_name",first_name);
+				RequestDispatcher rd = request.getRequestDispatcher("/Student.jsp");
+				rd.forward(request, response);
+			}else{
+				RequestDispatcher rd = request.getRequestDispatcher("/StudentRegister.jsp");
+				rd.forward(request, response);
+			}
+		}
 	}
 }
