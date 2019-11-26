@@ -1,16 +1,15 @@
 <%
-String courseName= (String)session.getAttribute("courseName");
-System.out.println("couse name: " + courseName);
-GuestServlet.DisplayCalendar(courseName);
-session.setAttribute("nextPage", "InstructorCalendar.jsp");
+String courseName = (String)session.getAttribute("courseName");
+int courseID = (int) session.getAttribute("courseID");
+System.out.println("course name: " + courseName);
+ArrayList<String> courseOH = CourseManager.getOfficeHoursCourse(courseID);
+//session.setAttribute("nextPage", "InstructorCalendar.jsp");
 
+// FIX PARSING THE courseOH ARRAY LIST 
 
-//tobe deleted later
-session.setAttribute("userID", "0");
-session.setAttribute("courseID", "0");
 %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.ArrayList" import="servlets.GuestServlet"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList" import="servlets.GuestServlet" import="classes.CourseManager"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,12 +24,12 @@ session.setAttribute("courseID", "0");
 <button onclick="window.location.href = 'StartQueueServlet';" style="color: #990000; text-decoration: none;">Start Office Hour Now</button></div>
 
 <div id = "hours">
-		<form action="AddOfficeHours">
-			Day <input type="text" name="day"></br>
-		  	Start Time (between 0 and 24): <input type="number" name="hourStart" min="0" max="24"></br>
-		  	End Time (between 0 and 24): <input type="number" name="hourEnd" min="0" max="24"></br> 
-		  <input type="submit">
-		</form>		
+        <form action="AddOfficeHours">
+            Day <input type="text" name="day"></br>
+            Start Time (between 0 and 24): <input type="number" name="hourStart" min="0" max="24"></br>
+            End Time (between 0 and 24): <input type="number" name="hourEnd" min="0" max="24"></br> 
+          <input type="submit">
+        </form>     
 </div>
 <p id="signout">
 <a href="SignOutServlet" style="color: #990000; text-decoration: none; text-align: center;" >Sign Out</a>

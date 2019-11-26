@@ -1,5 +1,12 @@
 package servlets;
 
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -7,44 +14,52 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
-import java.sql.*;
 
-@WebServlet("/JoinCourse")
-public class JoinCourse extends HttpServlet {
+/**
+ * Servlet implementation class SetCourseID
+ */
+@WebServlet("/SetCourseID")
+public class SetCourseID extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-      
-    public JoinCourse() {
-        super();
-    }
     
-    /*
-     * This servlet adds an instructor to a course and updates the appropriate tables 
-     */
+    public SetCourseID() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	    HttpSession session = request.getSession(); 
-        String username = (String) session.getAttribute("username");
-        String course = request.getParameter("course");  // TODO - FIX 
-        
-        PreparedStatement ps = null; 
+		// TODO Auto-generated method stub
+	    String courseName = (String) request.getParameter("value");
+	    int courseID = -1; 
+	    PreparedStatement ps = null; 
         Connection conn = null;
         Statement st = null; 
         ResultSet rs = null;
         
+        HttpSession session = request.getSession(); 
+        
         // TODO - UPDATE WITH FINAL DATABASE
+        //String sql = "jdbc:mysql://google/Hmwk4Database?cloudSqlInstance=cs201-lab:us-central1:sql-db-2&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=root&password=111";
+        
         String sql = "jdbc:mysql://google/OHScheduler"
-				+ "?cloudSqlInstance=zhoue-csci201l-lab7:us-central1:sql-db-lab7"
-				+ "&socketFactory=com.google.cloud.sql.mysql.SocketFactory" + "&useSSL=false"
-				+ "&user=zhoue&password=password1234";
+            + "?cloudSqlInstance=zhoue-csci201l-lab7:us-central1:sql-db-lab7"
+            + "&socketFactory=com.google.cloud.sql.mysql.SocketFactory" + "&useSSL=false"
+            + "&user=zhoue&password=password1234";
+        
         try {
             conn = DriverManager.getConnection(sql);
             st = conn.createStatement(); 
             
             // insert instructor and course into instructorCourse table   
-            String statement = "insert into instructorCourse (courseID, instructorID) values ( (select courseID from course where courseName=\'"+ course + "\'), "
-                + "(select instructorID from instructor where username=\'" + username + "\'))"; 
+            String statement = "select courseID from course where courseName=\"" + courseName + "\"" ; 
             ps = conn.prepareStatement(statement);
-            ps.executeUpdate(); 
+            boolean success = ps.execute(statement); 
+            
+            if (success) {
+                rs = ps.getResultSet();
+                rs.next();
+                courseID = rs.getInt("courseID");
+            }
             
         } catch (SQLException sqle) {
             System.out.println(sqle.getMessage());
@@ -61,8 +76,9 @@ public class JoinCourse extends HttpServlet {
             }
         }
         
-        // forward to instructor jsp  - TODO FIX FORWARD 
-         RequestDispatcher dispatch = getServletContext().getRequestDispatcher("/Instructor.jsp");
+        session.setAttribute("courseID", courseID);
+        session.setAttribute("courseName", courseName);
+        RequestDispatcher dispatch = getServletContext().getRequestDispatcher("/InstructorCalendar.jsp");
         
         try {
             dispatch.forward(request, response);

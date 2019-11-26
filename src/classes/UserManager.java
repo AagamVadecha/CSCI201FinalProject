@@ -34,6 +34,15 @@ public class UserManager {
                 }
                 return false;
             }
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
             ps = conn.prepareStatement(statement2);
             ps.setString(1,username);
             rs = ps.executeQuery();
@@ -48,6 +57,15 @@ public class UserManager {
                     conn.close();
                 }
                 return false;
+            }
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (conn != null) {
+                conn.close();
             }
             if (id == 2)
                 statement = "INSERT INTO instructor(username,password,fName,lName) VALUES(?,?,?,?)";

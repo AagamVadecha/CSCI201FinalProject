@@ -2,11 +2,15 @@
 /* IF U WANT MAKE A NEW FUNCTION TO DISPLAY ALL OF COURSE'S OFFICE HOURS
 OR USE DisplayCalendar IN A LOOP FOR ALL OF THIS COURSE'S OFFICE HOURS */
 String courseName= (String)session.getAttribute("courseName");
+String username = (String)session.getAttribute("username");
+ArrayList<String> instructorOH = CourseManager.getInstructorCourses(username);
 System.out.println("course name: " + courseName);
-GuestServlet.DisplayCalendar(courseName);
+
+// PARSE THROUGH instructorOH ARRAY 
+
 %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.ArrayList" import="servlets.GuestServlet"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList" import="servlets.GuestServlet" import="classes.CourseManager"%>
 <!DOCTYPE html>
 <html>
 <head>
