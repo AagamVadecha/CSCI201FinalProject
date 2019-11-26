@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import classes.QueueManager;
+import classes.javaMailer;
 
 /**
  * Servlet implementation class FinishQuestionServlet
