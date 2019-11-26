@@ -19,8 +19,7 @@
   <div id="formContent">
     <!-- Login Form -->
     <form method="GET" action="StudentLoginServlet">
-     <label for="first_name" style="color: #FFCC00">First Name</label>
-      <label for="last_name" style="color: #FFCC00">Last Name</label>
+      <input type="last_name" id="last" class="fadeIn third" name="last_name" >
       <label for="login" style="color: #FFCC00">Username</label>
       <input type="text" id="login" class="fadeIn second" name="username" >
       <label for="password" style="color: #FFCC00">Password</label>

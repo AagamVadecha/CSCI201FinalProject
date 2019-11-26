@@ -1,6 +1,6 @@
 <%
 String courseName= (String)session.getAttribute("courseName");
-System.out.println("couse name: " + courseName);
+System.out.println("course name: " + courseName);
 int queueNumber = GuestServlet.getQueue();
 GuestServlet.DisplayCalendar(courseName);
 session.setAttribute("checkType", "student");
@@ -10,8 +10,8 @@ session.setAttribute("checkType", "student");
 
 
 //to be deleted later
-session.setAttribute("userID", "0");
-session.setAttribute("courseID", "0");
+session.setAttribute("userID", 0);
+session.setAttribute("courseID",0);
 %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.ArrayList" import="servlets.GuestServlet"%>

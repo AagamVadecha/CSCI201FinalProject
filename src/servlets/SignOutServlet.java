@@ -21,11 +21,11 @@ public class SignOutServlet extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SignOutServlet(HttpSession session) {
-//        super();
-        session.invalidate();
-        // TODO Auto-generated constructor stub
-    }
+//    public SignOutServlet(HttpSession session) {
+////        super();
+//        session.invalidate();
+//        // TODO Auto-generated constructor stub
+//    }
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
