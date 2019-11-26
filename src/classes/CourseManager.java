@@ -151,14 +151,14 @@ public class CourseManager {
      * hours. 
      * Parameters: instructor's email
      */
-    public static ArrayList<ArrayList<String>> getOfficeHoursInstructor(String username) {
-        ArrayList<ArrayList<String>> hours = new ArrayList<ArrayList<String>>();
-
+    public static ArrayList<String> getOfficeHoursInstructor(String username) {
+        ArrayList<String> hours = new ArrayList<String>();
+/*
         ArrayList<String> courseNames = new ArrayList<String>();
         ArrayList<String> day = new ArrayList<String>();
         ArrayList<String> hourStart = new ArrayList<String>();
         ArrayList<String> hourEnd = new ArrayList<String>();
-
+*/
         PreparedStatement ps = null;
         Connection conn = null;
         Statement st = null;
@@ -195,10 +195,13 @@ public class CourseManager {
                     if (success) {
                         rs = ps.getResultSet();
                         while (rs.next()) {
-                            courseNames.add(rs.getString("courseName"));
+                            String oh = rs.getString("courseName") + ": " + rs.getString("day") + " Start: " + rs.getInt("hourStart")
+                                + " End: " + rs.getInt("hourEnd"); 
+                           /* courseNames.add(rs.getString("courseName"));
                             day.add(rs.getString("day"));
                             hourStart.add(Integer.toString(rs.getInt("hourStart")));
-                            hourEnd.add(Integer.toString(rs.getInt("hourEnd")));
+                            hourEnd.add(Integer.toString(rs.getInt("hourEnd"))); */
+                            hours.add(oh);
                         }
                     }
                 }
@@ -218,23 +221,24 @@ public class CourseManager {
                 System.out.println(sqle.getMessage());
             }
         }
-        hours.add(courseNames); 
+       /* hours.add(courseNames); 
         hours.add(day);
         hours.add(hourStart);
         hours.add(hourEnd);
+        */
         return hours;
     }
 
     /* This function returns all the office hours for a specific course. 
      * Parameters: course name 
      */
-    public static ArrayList<ArrayList<String>> getOfficeHoursCourse(int courseID) {
-        ArrayList<ArrayList<String>> hours = new ArrayList<ArrayList<String>>();
-
+    public static ArrayList<String> getOfficeHoursCourse(int courseID) {
+        ArrayList<String> hours = new ArrayList<String>();
+/*
         ArrayList<String> day = new ArrayList<String>();
         ArrayList<String> hourStart = new ArrayList<String>();
         ArrayList<String> hourEnd = new ArrayList<String>();
-
+*/
         PreparedStatement ps = null;
         Connection conn = null;
         Statement st = null;
@@ -259,12 +263,14 @@ public class CourseManager {
             if (success) {
                 rs = ps.getResultSet();
                 while (rs.next()) {
-                    day.add(rs.getString("day"));
+                    /*day.add(rs.getString("day"));
                     hourStart.add(Integer.toString(rs.getInt("hourStart")));
                     hourEnd.add(Integer.toString(rs.getInt("hourEnd")));
+                    */
+                    String oh = rs.getString("day") + " Start: " + rs.getInt("hourStart") + " End: " + rs.getInt("hourEnd");
+                    hours.add(oh);
                 }
             }
-
 
         } catch (SQLException sqle) {
             System.out.println(sqle.getMessage());
@@ -280,9 +286,11 @@ public class CourseManager {
                 System.out.println(sqle.getMessage());
             }
         }
+        /*
         hours.add(day);
         hours.add(hourStart);
         hours.add(hourEnd);
+        */
         return hours;
     }
 }
