@@ -13,6 +13,8 @@
     String username = (String) request.getAttribute("username");
     String password = (String) request.getAttribute("password");
     String confirmpassword = (String) request.getAttribute("confirmpassword");
+    String first_name = (String) request.getAttribute("first_name");
+    String last_name = (String) request.getAttribute("last_name");
   	%>
 </head>
 <body>
@@ -21,7 +23,8 @@
     <!-- Login Form -->
     <hr style='border-top: dotted 1px;' />
     <form method="GET" action="StudentRegisterServlet">
-     <label for="first_name" style="color: #FFCC00">First Name</label>
+    <label for="first_name" style="color: #FFCC00">First Name</label>
+      <input type="first_name" id="first_name" class="fadeIn third" name="first_name" >
       <label for="last_name" style="color: #FFCC00">Last Name</label>
       <label for="login" style="color: #FFCC00">Username</label>
       <input type="text" id="login" class="fadeIn second" name="username">
