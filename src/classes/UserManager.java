@@ -9,7 +9,7 @@ public class UserManager {
         //going to Use Elizabeth's SQL code
         Connection conn = null;
         PreparedStatement ps = null;
-        String sql = "jdbc:mysql://google/ClientRecords" // TODO db name
+        String sql = "jdbc:mysql://google/OHScheduler"
                 + "?cloudSqlInstance=zhoue-csci201l-lab7:us-central1:sql-db-lab7"
                 + "&socketFactory=com.google.cloud.sql.mysql.SocketFactory" + "&useSSL=false"
                 + "&user=zhoue&password=password1234";
@@ -63,14 +63,15 @@ public class UserManager {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String sql = "jdbc:mysql://google/ClientRecords" // TODO db name
-                + "?cloudSqlInstance=zhoue-csci201l-lab7:us-central1:sql-db-lab7"
+        String sql = "jdbc:mysql://google/OHScheduler"
+        + "?cloudSqlInstance=zhoue-csci201l-lab7:us-central1:sql-db-lab7"
                 + "&socketFactory=com.google.cloud.sql.mysql.SocketFactory" + "&useSSL=false"
-                + "&user=zhoue&password=password1234";
+        + "&user=zhoue&password=password1234";
+
         try {
             Class.forName("com.mysql.jdbc.Driver");
             conn = DriverManager.getConnection(sql);
-            String statement = ""; // TODO
+            String statement = "SELECT * FROM instructor where username = ?  AND password = ?";
             ps = conn.prepareStatement(statement); // prepare statement
 //			ps.setInt(1,  portNum);
 //			ps.setString(2, IPAddress);
@@ -103,9 +104,9 @@ public class UserManager {
             Connection conn = null;
             PreparedStatement ps = null;
             ResultSet rs = null;
-            String sql = "jdbc:mysql://google/ClientRecords" // TODO db name
+            String sql = "jdbc:mysql://google/OHScheduler"
                     + "?cloudSqlInstance=zhoue-csci201l-lab7:us-central1:sql-db-lab7"
-                    + "&socketFactory=com.go;ogle.cloud.sql.mysql.SocketFactory" + "&useSSL=false"
+                    + "&socketFactory=com.google.cloud.sql.mysql.SocketFactory" + "&useSSL=false"
                     + "&user=zhoue&password=password1234";
             try {
                 Class.forName("com.mysql.jdbc.Driver");

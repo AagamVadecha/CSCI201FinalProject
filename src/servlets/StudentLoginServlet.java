@@ -36,6 +36,9 @@ public class StudentLoginServlet extends HttpServlet {
 			session.setAttribute("username",temp.get(1));
 			session.setAttribute("password",temp.get(2));
 			session.setAttribute("strikes",temp.get(5));
+			RequestDispatcher rd = request.getRequestDispatcher("/Student.jsp");
+			rd.forward(request, response);
+
 		}else{
 			RequestDispatcher rd = request.getRequestDispatcher("/StudentLogin.jsp");
 			rd.forward(request, response);

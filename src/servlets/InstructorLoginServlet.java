@@ -27,7 +27,7 @@ public class InstructorLoginServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		if(UserManager.verify(username,password)){
 			ArrayList<String> temp = UserManager.login(username,password);
-			session.setAttribute("userType", "student");
+			session.setAttribute("userType", "teacher");
 			session.setAttribute("id", temp.get(0));
 			session.setAttribute("first_name", temp.get(3));
 			session.setAttribute("last_name", temp.get(4));
