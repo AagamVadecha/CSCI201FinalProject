@@ -243,6 +243,52 @@ public class QueueDBM {
 
 		return studentID;
 	}
+	
+	public static Vector<String> getTopStudentInfo(int courseID) {
+		int studentID = getTopStudentID(courseID);
+		Vector<String> info = new Vector<>();
+		String username = ""; String fName = "";
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = "jdbc:mysql://google/OHScheduler"
+				+ "?cloudSqlInstance=zhoue-csci201l-lab7:us-central1:sql-db-lab7"
+				+ "&socketFactory=com.google.cloud.sql.mysql.SocketFactory" + "&useSSL=false"
+				+ "&user=zhoue&password=password1234";
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = DriverManager.getConnection(sql);
+	
+			ps = conn.prepareStatement("select * from student where studentID=?"); // prepare statement
+			ps.setInt(1, studentID);
+			rs = ps.executeQuery();
+			if (rs.next()) {
+				username = rs.getString("username");
+				fName = rs.getString("fName");
+				info.add(username); info.add(fName);
+			}
+		} catch (SQLException sqle) {
+			System.out.println(sqle.getMessage());
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (ps != null) {
+					ps.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (SQLException sqle) {
+				System.out.println(sqle.getMessage());
+			}
+		}
+
+		return info;
+	}
 
 	public static void addStrike(int studentID) {
 		// wait to confirm user table's structure.

@@ -39,6 +39,10 @@ public class QueueManager {
 	public static void blacklistTopStudent(int courseID) {
 		QueueDBM.addStrike(QueueDBM.getTopStudentID(courseID));
 	}
+	
+	public static Vector<String> getTopStudentInfo(int courseID){
+		return QueueDBM.getTopStudentInfo(courseID);
+	}
 
 }
 

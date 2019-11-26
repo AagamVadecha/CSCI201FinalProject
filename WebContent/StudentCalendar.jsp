@@ -1,6 +1,6 @@
 <%
 String courseName= (String)session.getAttribute("courseName");
-System.out.println("couse name: " + courseName);
+System.out.println("course name: " + courseName);
 int queueNumber = GuestServlet.getQueue();
 GuestServlet.DisplayCalendar(courseName);
 session.setAttribute("checkType", "student");
