@@ -86,6 +86,8 @@ SQ.jsp
 session variable userID, courseID
 		
 questions
+queueStatus attrib in StudentQueue.jsp
+
 which servlet/ fxn checks for student status in queue
 		
 		
