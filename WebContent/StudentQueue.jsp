@@ -16,7 +16,7 @@ int queueNumber = GuestServlet.getQueue();
 
 <script>
 var xhttp = new XMLHttpRequest();
-xhttp.open("GET", 'DisplayQueueServlet?', false);
+xhttp.open("GET", 'CheckQueueServlet?', false);
 xhttp.send();
 
 if(xhttp.responseText.trim().length > 0){
@@ -56,8 +56,7 @@ function updateQueue(){
 <!-- ADD/REMOVE FROM QUEUE -->
 <%
 //if the user is already in the queue show Remove From Queue
-String check  = (String)request.getSession().getAttribute("queueStatus");
-if(request.getSession().getAttribute("queueStatus") == "InQueue")
+if((boolean)request.getSession().getAttribute("InQueue"))
  { %>
 	<div id = "leave">
 		<form action="LeaveQueueServlet">
@@ -80,8 +79,6 @@ else {
 %>
 
 <div id = "update">
-
-
 		<button type='button' onclick='updateQueue()'>Update Page</button>
 </div> 
 
