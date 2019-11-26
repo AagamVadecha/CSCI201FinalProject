@@ -1,11 +1,11 @@
 
 <%
-ArrayList <String> course_list = GuestServlet.getCourses();  
-/*ASSUME THAT INSTRUCTOR NAME ("grujic:)") IS SAVED IN SESSION VARIABLE AFTER INSTRUCTOR LOGIN/ REGISTER*/
-ArrayList <String> instructor_course_list = GuestServlet.getInstructorCourses("grujic:)");   
+ArrayList <String> course_list = CourseManager.getAllCourses();  
+String username = (String)session.getAttribute("username");
+ArrayList <String> instructor_course_list = CourseManager.getInstructorCourses(username);   
 %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.ArrayList" import="servlets.GuestServlet" %>
+    pageEncoding="UTF-8" import="java.util.ArrayList" import="classes.CourseManager" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,17 +19,17 @@ ArrayList <String> instructor_course_list = GuestServlet.getInstructorCourses("g
 <p id = "CoursesLabel" class="solid">Your Courses</p>
 Courses listed here
 <% for (int i = 0; i <instructor_course_list.size(); i++)
- {	 String instructor_course = instructor_course_list.get(i); %>
-  		<button><a href="InstructorCalendar.jsp" style="color: #990000; text-decoration: none;"><%=instructor_course%></a></button>
+ {   String instructor_course = instructor_course_list.get(i); %>
+        <button><a href="InstructorCalendar.jsp" style="color: #990000; text-decoration: none;"><%=instructor_course%></a></button>
  <%
  }%>
  
 <div id = "newcourse">
-		<form action="InstructorAddCourse">
-			<input type="text" name="new" value="Add New Course" id="commentbox"><br>
-			<input type="submit" id="submit_button" value="ADD NEW COURSE">
-		</form>
-	</div> 
+        <form action="InstructorAddCourse">
+            <input type="text" name="new" value="Add New Course" id="commentbox"><br>
+            <input type="submit" id="submit_button" value="ADD NEW COURSE">
+        </form>
+    </div> 
 <button class="button"> 
 <a href="InstructorFullSchedule.jsp" style="color: #990000; text-decoration: none;">Your Schedule</a>
 </button>
@@ -43,7 +43,7 @@ Courses listed here
     
  <% for (int i = 0; i < course_list.size(); i++)
  {
-	 String course = course_list.get(i);
+     String course = course_list.get(i);
 %>
  <option  value="<%= course %>"> <%= course %></option>
 <% 
