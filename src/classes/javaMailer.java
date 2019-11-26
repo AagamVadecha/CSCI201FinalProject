@@ -12,7 +12,7 @@ public class javaMailer extends Thread {
     public javaMailer(String email, String firstName, String className){
         emailTo = email;
         this.firstName = firstName;
-
+        this.className = className;
         this.start();
     }
 
@@ -56,7 +56,8 @@ public class javaMailer extends Thread {
             message.setSubject("Next In Office Hour Queue");
 
             // Now set the actual message
-            message.setText("Hello, " + firstName + "\n\nYou are next in the queue for " + className +". Please come to your office hour location soon.");
+            message.setText("Hello, " + firstName + "\n\nYou are next in the queue for " + className +"" +
+                   ". Please come to your office hour location soon.");
 
             // Send message
             Transport.send(message);
