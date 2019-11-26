@@ -37,10 +37,14 @@ public class FinishQuestionServlet extends HttpServlet {
 		int courseID = (int) session.getAttribute("courseID");
 		QueueManager.ejectQuestion(courseID,  -1); // -1 indicate remove 1st student
 		session.setAttribute("InQueue", false);
-		String username=QueueManager.getTopStudentInfo(courseID).firstElement();
-		String fName=QueueManager.getTopStudentInfo(courseID).lastElement();
-		javaMailer jm =new javaMailer(username, fName);
-		jm.start();
+		if (QueueManager.getSecondStudentInfo(courseID) != null) {
+			String username=QueueManager.getSecondStudentInfo(courseID).firstElement();
+			String fName=QueueManager.getSecondStudentInfo(courseID).get(1);
+			String courseName=QueueManager.getSecondStudentInfo(courseID).lastElement();
+			javaMailer jm =new javaMailer(username, fName, courseName);
+			jm.start();
+		}
+		
 	}
 
 	/**
