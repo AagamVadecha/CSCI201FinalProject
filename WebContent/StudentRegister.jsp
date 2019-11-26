@@ -26,6 +26,7 @@
     <label for="first_name" style="color: #FFCC00">First Name</label>
       <input type="first_name" id="first_name" class="fadeIn third" name="first_name" >
       <label for="last_name" style="color: #FFCC00">Last Name</label>
+      <input type="last_name" id="last_name" class="fadeIn third" name="last_name" >
       <label for="login" style="color: #FFCC00">Username</label>
       <input type="text" id="login" class="fadeIn second" name="username">
       <label for="password" style="color: #FFCC00">Password</label>
