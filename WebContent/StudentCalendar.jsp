@@ -1,20 +1,15 @@
 <%
-String courseName= (String)session.getAttribute("courseName");
-System.out.println("course name: " + courseName);
 int queueNumber = GuestServlet.getQueue();
-GuestServlet.DisplayCalendar(courseName);
-session.setAttribute("checkType", "student");
 
+String courseName = (String)session.getAttribute("courseName");
+int courseID = (int) session.getAttribute("courseID");
+System.out.println("course name: " + courseName);
+ArrayList<String> courseOH = CourseManager.getOfficeHoursCourse(courseID);
 
-
-
-
-//to be deleted later
-session.setAttribute("userID", 0);
-session.setAttribute("courseID",0);
+// PARSE courseOH AND DISPLAY COURSES
 %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.ArrayList" import="servlets.GuestServlet"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList" import="servlets.GuestServlet" import="classes.CourseManager"%>
 <!DOCTYPE html>
 <html>
 <head>
