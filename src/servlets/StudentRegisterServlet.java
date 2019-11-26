@@ -28,24 +28,27 @@ public class StudentRegisterServlet extends HttpServlet {
 
 		if(confirmpw.trim().equals(password.trim())){
 			if(UserManager.register(username,password,first_name,last_name,1)){
-				session.
-
+				session.setAttribute("username",username);
+				session.setAttribute("password",password);
+				session.setAttribute("first_name",first_name);
+				RequestDispatcher rd = request.getRequestDispatcher("/Student.jsp");
+				rd.forward(request, response);
 			}else{
 				RequestDispatcher rd = request.getRequestDispatcher("/StudentRegister.jsp");
 				rd.forward(request, response);
 			}
 		}
 
-		HttpSession session = request.getSession();
-		session.setAttribute("first_name", first_name);
+//		HttpSession session = request.getSession();
+//		session.setAttribute("first_name", first_name);
 		//***************
 		//PLEASE VALIDATE LOGIN AND ACTUALLY LOG IN
 		//use login() and verify()
 		//IF LOGIN SUCCESSFUL SAVE INSTRUCTOR NAME IN SESSION VARIABLE (SEE BELOW)
 			//HttpSession session = request.getSession();
 			//session.setAttribute("first_name", first_name);
-			RequestDispatcher rd = request.getRequestDispatcher("/Student.jsp");
-			rd.forward(request, response);
+//			RequestDispatcher rd = request.getRequestDispatcher("/Student.jsp");
+//			rd.forward(request, response);
 		//ELSE KEEP ON LOGIN PAGE AND SHOW ERROR MESSAGE (BASICALLY HW3)
 			//RequestDispatcher rd = request.getRequestDispatcher("/StudentLogin.jsp");
 			//rd.forward(request, response);;
