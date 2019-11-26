@@ -84,9 +84,9 @@ public class UserManager {
         PreparedStatement ps = null;
         ResultSet rs = null;
         String sql = "jdbc:mysql://google/OHScheduler"
-        + "?cloudSqlInstance=zhoue-csci201l-lab7:us-central1:sql-db-lab7"
+                + "?cloudSqlInstance=zhoue-csci201l-lab7:us-central1:sql-db-lab7"
                 + "&socketFactory=com.google.cloud.sql.mysql.SocketFactory" + "&useSSL=false"
-        + "&user=zhoue&password=password1234";
+                + "&user=zhoue&password=password1234";
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
