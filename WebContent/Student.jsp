@@ -18,7 +18,7 @@ ArrayList <String> course_list = CourseManager.getAllCourses();
 <a href="servlet" style="color: #990000; text-decoration: none;" > Sign Out</a>
 </p>
 <h1>Select a course</h1>
-<form id="dropdown" method="GET" action="GuestServlet">  
+<form id="dropdown" method="GET" action="SetCourseIDStudent">  
   <select id="drop" name="course_list">
     <option value="choose">Select Course</option>
     
