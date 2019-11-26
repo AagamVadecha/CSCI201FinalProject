@@ -1,9 +1,9 @@
 <%
 session.setAttribute("nextPage", "/StudentCalendar.jsp");
-ArrayList <String> course_list = GuestServlet.getCourses();   
+ArrayList <String> course_list = CourseManager.getAllCourses();   
 %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.ArrayList" import="servlets.GuestServlet"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList" import="servlets.GuestServlet" import ="classes.CourseManager"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,7 +24,7 @@ ArrayList <String> course_list = GuestServlet.getCourses();
     
  <% for (int i = 0; i < course_list.size(); i++)
  {
-	 String course = course_list.get(i);
+     String course = course_list.get(i);
 %>
  <option  value="<%= course %>"> <%= course %></option>
 <% 
