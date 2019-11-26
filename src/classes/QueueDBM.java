@@ -278,6 +278,7 @@ public class QueueDBM {
 			if (studentID == -1) {
 				return null;
 			}
+			// get student info for 2nd in line
 			ps = conn.prepareStatement("select * from student where studentID=?"); // prepare statement
 			ps.setInt(1, studentID);
 			rs = ps.executeQuery();
