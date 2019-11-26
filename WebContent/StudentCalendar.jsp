@@ -10,8 +10,8 @@ session.setAttribute("checkType", "student");
 
 
 //to be deleted later
-session.setAttribute("userID", "0");
-session.setAttribute("courseID", "0");
+session.setAttribute("userID", 0);
+session.setAttribute("courseID",0);
 %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.ArrayList" import="servlets.GuestServlet"%>
