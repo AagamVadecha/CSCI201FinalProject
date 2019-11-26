@@ -22,13 +22,33 @@ public class UserManager {
             ps = conn.prepareStatement(statement1);
             ps.setString(1,username);
             ResultSet rs = ps.executeQuery();
-            if(rs.next())
+            if(rs.next()) {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
                 return false;
+            }
             ps = conn.prepareStatement(statement2);
             ps.setString(1,username);
             rs = ps.executeQuery();
-            if(rs.next())
+            if(rs.next()) {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
                 return false;
+            }
             if (id == 2)
                 statement = "INSERT INTO instructor(username,password,fName,lName) VALUES(?,?,?,?)";
             else if (id == 1)
@@ -58,7 +78,7 @@ public class UserManager {
         return true;
     }
 
-    public static boolean verify(String username, String password){
+    public static boolean verify(String username, String password, int id){
         Vector<Vector<String>> ans=new Vector<Vector<String>>();
         Connection conn = null;
         PreparedStatement ps = null;
@@ -71,11 +91,27 @@ public class UserManager {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             conn = DriverManager.getConnection(sql);
-            String statement = "SELECT * FROM instructor where username = ?  AND password = ?";
+            String statement ="";
+            if(id == 2)
+                statement = "SELECT * FROM instructor where username = ?  AND password = ?";
+            else if(id==1)
+                statement =  "SELECT * FROM student where username = ?  AND password = ?";
             ps = conn.prepareStatement(statement); // prepare statement
 //			ps.setInt(1,  portNum);
 //			ps.setString(2, IPAddress);
             rs = ps.executeQuery(); // execute query, return result set
+            if(!rs.next()) {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+                return false;
+            }
         } catch (SQLException sqle) {
             System.out.println(sqle.getMessage());
         } catch (ClassNotFoundException e) {
@@ -98,9 +134,9 @@ public class UserManager {
         return !ans.isEmpty();
     }
 
-    public static ArrayList<String> login(String username, String password) {
+    public static ArrayList<String> login(String username, String password, int id) {
         ArrayList<String> ans= new ArrayList<String>();
-        if(verify(username, password)) {
+        if(verify(username, password, id)) {
             Connection conn = null;
             PreparedStatement ps = null;
             ResultSet rs = null;
@@ -111,11 +147,24 @@ public class UserManager {
             try {
                 Class.forName("com.mysql.jdbc.Driver");
                 conn = DriverManager.getConnection(sql);
-                String statement = "SELECT * FROM instructor where username = ?  AND password = ?"; // TODO
+                String statement = "";
+                if(id == 2)
+                    statement = "SELECT * FROM instructor where username = ?  AND password = ?";
+                else if(id==1)
+                    statement =  "SELECT * FROM student where username = ?  AND password = ?";
                 ps = conn.prepareStatement(statement); // prepare statement
                 ps.setString(1, username);
                 ps.setString(2,password);
                 rs = ps.executeQuery(); // execute query, return result set
+                if(rs.next()){
+                    ans.add(Integer.toString(rs.getInt(1)));
+                    ans.add(rs.getString(2));
+                    ans.add(rs.getString(3));
+                    ans.add(rs.getString(4));
+                    ans.add(rs.getString(5));
+                    if(id==1)
+                        ans.add(Integer.toString(rs.getInt(6)));
+                }
             } catch (SQLException sqle) {
                 System.out.println(sqle.getMessage());
             } catch (ClassNotFoundException e) {

@@ -29,7 +29,7 @@ public class StudentRegisterServlet extends HttpServlet {
 
 		if(confirmpw.trim().equals(password.trim())) {
 			if (UserManager.register(username, password, first_name, last_name, 1)) {
-				ArrayList<String> temp = UserManager.login(username, password);
+				ArrayList<String> temp = UserManager.login(username, password,1);
 				session.setAttribute("userType", "student");
 				session.setAttribute("id", temp.get(0));
 				session.setAttribute("first_name", temp.get(3));
