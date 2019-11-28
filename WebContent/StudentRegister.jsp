@@ -22,7 +22,7 @@
   <div id="formContent">
     <!-- Login Form -->
     <hr style='border-top: dotted 1px;' />
-    <form method="GET" action="StudentRegisterServlet">
+    <form method="POST" action="StudentRegisterServlet">
     <label for="first_name" style="color: #FFCC00">First Name</label>
       <input type="first_name" id="first_name" class="fadeIn third" name="first_name" >
       <label for="last_name" style="color: #FFCC00">Last Name</label>
