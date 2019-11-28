@@ -27,7 +27,8 @@ public class InstructorRegisterServlet extends HttpServlet {
 		String first_name = request.getParameter("first_name");
 		String last_name = request.getParameter("last_name");
 		String confirmpw = request.getParameter("confirmpassword");
-
+		String next = "/Instructor.jsp";
+		
 		if(confirmpw.trim().equals(password.trim())) {
 			if (UserManager.register(username, password, first_name, last_name, 2)) {
 				ArrayList<String> temp = UserManager.login(username,password,2);
@@ -37,11 +38,23 @@ public class InstructorRegisterServlet extends HttpServlet {
 				session.setAttribute("last_name", temp.get(4));
 				session.setAttribute("username",temp.get(1));
 				session.setAttribute("password",temp.get(2));
-				RequestDispatcher rd = request.getRequestDispatcher("/Instructor.jsp");
-				rd.forward(request, response);
+			}
+			else {
+			    next = "/InstructorRegister.jsp";
 			}
 		}
-		RequestDispatcher rd = request.getRequestDispatcher("/InstructorRegister.jsp");
-		rd.forward(request, response);
+		else {
+		    next = "/InstructorRegister.jsp";
+		}
+		// TODO - ERROR MESSAGE
+		RequestDispatcher dispatch = getServletContext().getRequestDispatcher(next);
+        
+        try {
+            dispatch.forward(request, response);
+        } catch(IOException e) {
+            e.printStackTrace();
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } 
 	}
 }
