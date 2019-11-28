@@ -25,33 +25,33 @@ public class InstructorLoginServlet extends HttpServlet {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		HttpSession session = request.getSession();
+		String next = "/Instructor.jsp";
 		if(UserManager.verify(username,password,2)){
 			ArrayList<String> temp = UserManager.login(username,password,2);
-			session.setAttribute("userType", "teacher");
-			session.setAttribute("id", temp.get(0));
-			session.setAttribute("first_name", temp.get(3));
-			session.setAttribute("last_name", temp.get(4));
-			session.setAttribute("username",temp.get(1));
-			session.setAttribute("password",temp.get(2));
-			RequestDispatcher rd = request.getRequestDispatcher("/Instructor.jsp");
-			rd.forward(request, response);
+			if (!temp.isEmpty()) {
+    			session.setAttribute("userType", "teacher");
+    			session.setAttribute("id", temp.get(0));
+    			session.setAttribute("first_name", temp.get(3));
+    			session.setAttribute("last_name", temp.get(4));
+    			session.setAttribute("username",temp.get(1));
+    			session.setAttribute("password",temp.get(2));
+			}
+			else {
+			    next = "/InstructorLogin.jsp";
+			}
 		}else{
-			RequestDispatcher rd = request.getRequestDispatcher("/InstructorLogin.jsp");
-			rd.forward(request, response);
+		    next = "/InstructorLogin.jsp";
+			// TODO - ERROR MESSAGE
 		}
-		
-		
-		//***************
-		//PLEASE VALIDATE LOGIN AND ACTUALLY LOG IN
-		//use login() and verify()
-		//IF LOGIN SUCCESSFUL SAVE INSTRUCTOR NAME IN SESSION VARIABLE (SEE BELOW)
-			//HttpSession session = request.getSession();
-			//session.setAttribute("first_name", first_name);
-//			RequestDispatcher rd = request.getRequestDispatcher("/Instructor.jsp");
-//			rd.forward(request, response);
-		//ELSE KEEP ON LOGIN PAGE AND SHOW ERROR MESSAGE (BASICALLY HW3)
-			//RequestDispatcher rd = request.getRequestDispatcher("/InstructorLogin.jsp");
-			//rd.forward(request, response);
+		RequestDispatcher dispatch = getServletContext().getRequestDispatcher(next);
+        
+        try {
+            dispatch.forward(request, response);
+        } catch(IOException e) {
+            e.printStackTrace();
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } 
 	}
 }
 
