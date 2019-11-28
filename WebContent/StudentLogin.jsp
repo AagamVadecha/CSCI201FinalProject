@@ -18,7 +18,7 @@
     <div class="wrapper fadeInDown">
   <div id="formContent">
     <!-- Login Form -->
-    <form method="GET" action="StudentLoginServlet">
+    <form method="POST" action="StudentLoginServlet">
       <input type="last_name" id="last" class="fadeIn third" name="last_name" >
       <label for="login" style="color: #FFCC00">Username</label>
       <input type="text" id="login" class="fadeIn second" name="username" >
