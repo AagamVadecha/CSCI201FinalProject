@@ -19,54 +19,48 @@ public class UserManager {
             String statement = "";
             String statement1 = "SELECT * FROM instructor where username = ?";
             String statement2 = "SELECT * FROM student where username = ?";
-//            ps = conn.prepareStatement(statement1);
-//            ps.setString(1,username);
-//            ResultSet rs = ps.executeQuery();
-//            if(rs.next()) {
-//                if (rs != null) {
-//                    rs.close();
-//                }
-//                if (ps != null) {
-//                    ps.close();
-//                }
-//                if (conn != null) {
-//                    conn.close();
-//                }
-//                return false;
-//            }
-//            if (rs != null) {
-//                rs.close();
-//            }
-//            if (ps != null) {
-//                ps.close();
-//            }
-//            if (conn != null) {
-//                conn.close();
-//            }
-//            ps = conn.prepareStatement(statement2);
-//            ps.setString(1,username);
-//            rs = ps.executeQuery();
-//            if(rs.next()) {
-//                if (rs != null) {
-//                    rs.close();
-//                }
-//                if (ps != null) {
-//                    ps.close();
-//                }
-//                if (conn != null) {
-//                    conn.close();
-//                }
-//                return false;
-//            }
-//            if (rs != null) {
-//                rs.close();
-//            }
-//            if (ps != null) {
-//                ps.close();
-//            }
-//            if (conn != null) {
-//                conn.close();
-//            }
+            ps = conn.prepareStatement(statement1);
+            ps.setString(1,username);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()) {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+                return false;
+            }
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            ps = conn.prepareStatement(statement2);
+            ps.setString(1,username);
+            rs = ps.executeQuery();
+            if(rs.next()) {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+                return false;
+            }
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
             if (id == 2)
                 statement = "INSERT INTO instructor(username,password,fName,lName) VALUES(?,?,?,?)";
             else if (id == 1)
@@ -115,6 +109,8 @@ public class UserManager {
             else if(id==1)
                 statement =  "SELECT * FROM student where username = ?  AND password = ?";
             ps = conn.prepareStatement(statement); // prepare statement
+            ps.setString(1, username);
+            ps.setString(2,password);
 //			ps.setInt(1,  portNum);
 //			ps.setString(2, IPAddress);
             rs = ps.executeQuery(); // execute query, return result set
@@ -154,7 +150,6 @@ public class UserManager {
 
     public static ArrayList<String> login(String username, String password, int id) {
         ArrayList<String> ans= new ArrayList<String>();
-        if(verify(username, password, id)) {
             Connection conn = null;
             PreparedStatement ps = null;
             ResultSet rs = null;
@@ -204,7 +199,5 @@ public class UserManager {
             }
 
             return ans;
-        }
-        return ans;
     }
 }
