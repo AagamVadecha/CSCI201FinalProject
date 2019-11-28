@@ -1,8 +1,6 @@
 package servlets;
 
 import classes.UserManager;
-import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion;
-
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class StudentLoginServlet
+ * Servlet implementation class StudentLoginServlet 
  */
 @WebServlet("/StudentLoginServlet")
 public class StudentLoginServlet extends HttpServlet {
@@ -27,33 +25,36 @@ public class StudentLoginServlet extends HttpServlet {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		HttpSession session = request.getSession();
+		String next = "/Student.jsp";
 		if(UserManager.verify(username,password,1)){
 			ArrayList<String> temp = UserManager.login(username,password,1);
-			session.setAttribute("userType", "student");
-			session.setAttribute("id", temp.get(0));
-			session.setAttribute("first_name", temp.get(3));
-			session.setAttribute("last_name", temp.get(4));
-			session.setAttribute("username",temp.get(1));
-			session.setAttribute("password",temp.get(2));
-			session.setAttribute("strikes",temp.get(5));
-			RequestDispatcher rd = request.getRequestDispatcher("/Student.jsp");
-			rd.forward(request, response);
-
+			// check if temp is empty - error 
+			if (!temp.isEmpty()) {
+    			session.setAttribute("userType", "student");
+    			session.setAttribute("id", temp.get(0));
+    			session.setAttribute("first_name", temp.get(3));
+    			session.setAttribute("last_name", temp.get(4));
+    			session.setAttribute("username",temp.get(1));
+    			session.setAttribute("password",temp.get(2));
+    			session.setAttribute("strikes",temp.get(5));
+			}
+			else {
+			    next = "/StudentLogin.jsp";
+			}
 		}else{
-			RequestDispatcher rd = request.getRequestDispatcher("/StudentLogin.jsp");
-			rd.forward(request, response);
+			next ="/StudentLogin.jsp";
+			// TODO - ERROR MESSAGE
 		}
-		//***************
-				//PLEASE VALIDATE LOGIN AND ACTUALLY LOG IN
-				//use login() and verify()
-				//IF LOGIN SUCCESSFUL SAVE INSTRUCTOR NAME IN SESSION VARIABLE (SEE BELOW)
-					//HttpSession session = request.getSession();
-					//session.setAttribute("first_name", first_name);
-//					RequestDispatcher rd = request.getRequestDispatcher("/Student.jsp");
-//					rd.forward(request, response);
-				//ELSE KEEP ON LOGIN PAGE AND SHOW ERROR MESSAGE (BASICALLY HW3)
-					//RequestDispatcher rd = request.getRequestDispatcher("/StudentLogin.jsp");
-					//rd.forward(request, response);
+		
+		RequestDispatcher dispatch = getServletContext().getRequestDispatcher(next);
+        
+        try {
+            dispatch.forward(request, response);
+        } catch(IOException e) {
+            e.printStackTrace();
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } 
 	}
 }
 
