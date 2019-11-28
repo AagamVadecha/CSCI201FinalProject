@@ -19,14 +19,15 @@ import javax.servlet.http.HttpSession;
 @WebServlet("/StudentRegisterServlet")
 public class StudentRegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	protected void service (HttpServletRequest request, HttpServletResponse response, HttpSession session) throws ServletException, IOException {
+	protected void service (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//Get username and password from form
+	    	HttpSession session = request.getSession();
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		String first_name = request.getParameter("first_name");
 		String last_name = request.getParameter("last_name");
 		String confirmpw = request.getParameter("confirmpassword");
-
+		String next = "/Student.jsp";
 		if(confirmpw.trim().equals(password.trim())) {
 			if (UserManager.register(username, password, first_name, last_name, 1)) {
 				ArrayList<String> temp = UserManager.login(username, password,1);
@@ -37,25 +38,26 @@ public class StudentRegisterServlet extends HttpServlet {
 				session.setAttribute("username", temp.get(1));
 				session.setAttribute("password", temp.get(2));
 				session.setAttribute("strikes", temp.get(5));
-				RequestDispatcher rd = request.getRequestDispatcher("/Student.jsp");
-				rd.forward(request, response);
+//				RequestDispatcher rd = request.getRequestDispatcher("/Student.jsp");
+//				rd.forward(request, response);
+				
+			}
+			else {
+			    next = "/StudentRegister.jsp";
 			}
 		}
-				RequestDispatcher rd = request.getRequestDispatcher("/StudentRegister.jsp");
-				rd.forward(request, response);
+		else {
+		    next = "/StudentRegister.jsp";
 		}
-
-//		HttpSession session = request.getSession();
-//		session.setAttribute("first_name", first_name);
-		//***************
-		//PLEASE VALIDATE LOGIN AND ACTUALLY LOG IN
-		//use login() and verify()
-		//IF LOGIN SUCCESSFUL SAVE INSTRUCTOR NAME IN SESSION VARIABLE (SEE BELOW)
-			//HttpSession session = request.getSession();
-			//session.setAttribute("first_name", first_name);
-//			RequestDispatcher rd = request.getRequestDispatcher("/Student.jsp");
-//			rd.forward(request, response);
-		//ELSE KEEP ON LOGIN PAGE AND SHOW ERROR MESSAGE (BASICALLY HW3)
-			//RequestDispatcher rd = request.getRequestDispatcher("/StudentLogin.jsp");
-			//rd.forward(request, response);;
+		RequestDispatcher dispatch = getServletContext().getRequestDispatcher(next);
+        
+		try {
+		    dispatch.forward(request, response);
+		} catch(IOException e) {
+		    e.printStackTrace();
+		} catch (ServletException e) {
+		    e.printStackTrace();
+		} 
+			// TODO - ERROR MESSAGE 
+	}
 }
