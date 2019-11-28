@@ -1,0 +1,19 @@
+@charset "UTF-8";
+body 
+{
+   background-color: #990000;
+   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+   text-decoration: none;
+}
+
+h1 {
+	border-style: solid;
+	border-radius: 3px;
+    border-color: #FFCC00;
+    color: #FFCC00;
+    border-width: 5px;
+    width: 20%;
+    text-align: center;
+    margin-top: 30px;
+    margin-left: 100px;
+}

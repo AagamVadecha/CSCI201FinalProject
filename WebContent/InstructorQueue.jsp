@@ -12,7 +12,7 @@ session.setAttribute("checkType", "instructor");
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="InstructorCalendar.css" />
+<link rel="stylesheet" type="text/css" href="InstructorQueue.css" />
 <link rel="icon" href="cheesecake.png" type="image/png" sizes="16x16">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
@@ -61,22 +61,22 @@ function updateQueue(){
 <div id="queueInfo"> </div>
 
 <div id = "finishStudent">
-	<button type='button' onclick='nextStudent()'>Next Student</button>
+	<button type='button' onclick='nextStudent()'  style="color: #990000; text-decoration: none;" >Next Student</button>
 </div> 
 
 
 <div id = "noShow">
-		<button type='button' onclick='noShow()'>Student Not Showing Up</button>
+		<button type='button' onclick='noShow()'  style="color: #990000; text-decoration: none;" >Student Not Showing Up</button>
 </div> 
 
 
 <div id = "update">
-		<button type='button' onclick='updateQueue()'>Update Page</button>
+		<button type='button' onclick='updateQueue()'  style="color: #990000; text-decoration: none;" >Update Page</button>
 </div> 
 
 <div id = "end">
 		<form action="EndQueueServlet">
-			<input type="submit" id="submit_button" value="End Office Hour">
+			<input type="submit" id="submit_button" value="End Office Hour"  style="color: #990000; text-decoration: none;" >
 		</form>
 </div> 
 
