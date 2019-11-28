@@ -27,7 +27,7 @@ ArrayList <String> instructor_course_list = CourseManager.getInstructorCourses(u
 <div id = "newcourse">
         <form action="InstructorAddCourse">
             <input type="text" name="new" value="Add New Course" id="commentbox" style="color: #990000; text-decoration: none;"><br>
-            <input type="submit" id="submit_button" value="Add New Course">
+            <input type="submit" id="submit_newcourse" value="Add New Course">
         </form>
     </div> 
 <button class="button"> 
