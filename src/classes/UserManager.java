@@ -2,7 +2,6 @@ package classes;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Vector;
 
 public class UserManager {
     public static boolean register(String username, String password, String fname, String lname, int id) {
@@ -91,7 +90,6 @@ public class UserManager {
     }
 
     public static boolean verify(String username, String password, int id){
-        Vector<Vector<String>> ans=new Vector<Vector<String>>();
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -145,7 +143,7 @@ public class UserManager {
                 System.out.println(sqle.getMessage());
             }
         }
-        return !ans.isEmpty();
+        return true;
     }
 
     public static ArrayList<String> login(String username, String password, int id) {
