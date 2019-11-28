@@ -28,27 +28,24 @@ public class SetCourseID extends HttpServlet {
     }
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-	    String courseName = (String) request.getParameter("value");
+	    String courseName = (String) request.getParameter("course_list");
 	    int courseID = -1; 
 	    PreparedStatement ps = null; 
         Connection conn = null;
-        Statement st = null; 
         ResultSet rs = null;
-        
+        System.out.println("Set course ID: "+ courseName);
         HttpSession session = request.getSession(); 
         
         // TODO - UPDATE WITH FINAL DATABASE
-        //String sql = "jdbc:mysql://google/Hmwk4Database?cloudSqlInstance=cs201-lab:us-central1:sql-db-2&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=root&password=111";
+        String sql = "jdbc:mysql://google/Hmwk4Database?cloudSqlInstance=cs201-lab:us-central1:sql-db-2&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=root&password=111";
         
-        String sql = "jdbc:mysql://google/OHScheduler"
-            + "?cloudSqlInstance=zhoue-csci201l-lab7:us-central1:sql-db-lab7"
-            + "&socketFactory=com.google.cloud.sql.mysql.SocketFactory" + "&useSSL=false"
-            + "&user=zhoue&password=password1234";
-        
+//        String sql = "jdbc:mysql://google/OHScheduler"
+//            + "?cloudSqlInstance=zhoue-csci201l-lab7:us-central1:sql-db-lab7"
+//            + "&socketFactory=com.google.cloud.sql.mysql.SocketFactory" + "&useSSL=false"
+//            + "&user=zhoue&password=password1234";
+
         try {
             conn = DriverManager.getConnection(sql);
-            st = conn.createStatement(); 
             
             // insert instructor and course into instructorCourse table   
             String statement = "select courseID from course where courseName=\"" + courseName + "\"" ; 
@@ -59,8 +56,11 @@ public class SetCourseID extends HttpServlet {
                 rs = ps.getResultSet();
                 rs.next();
                 courseID = rs.getInt("courseID");
+                System.out.println("course ID: "+ courseID);
             }
-            
+            else {
+                throw new SQLException("Could not retrieve courseID");
+            }
         } catch (SQLException sqle) {
             System.out.println(sqle.getMessage());
         } finally {
