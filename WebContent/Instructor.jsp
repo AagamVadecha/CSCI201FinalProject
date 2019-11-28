@@ -17,7 +17,7 @@ ArrayList <String> instructor_course_list = CourseManager.getInstructorCourses(u
 <body>
 <p id = "Instructor" class="solid">Instructor</p>
 <p id = "CoursesLabel" class="solid">Your Courses</p>
-Courses listed here
+<h3>Courses listed here</h3>
 <% for (int i = 0; i <instructor_course_list.size(); i++)
  {   String instructor_course = instructor_course_list.get(i); %>
         <button><a href="InstructorCalendar.jsp" style="color: #990000; text-decoration: none;"><%=instructor_course%></a></button>
@@ -26,8 +26,8 @@ Courses listed here
  
 <div id = "newcourse">
         <form action="InstructorAddCourse">
-            <input type="text" name="new" value="Add New Course" id="commentbox"><br>
-            <input type="submit" id="submit_button" value="ADD NEW COURSE">
+            <input type="text" name="new" value="Add New Course" id="commentbox" style="color: #990000; text-decoration: none;"><br>
+            <input type="submit" id="submit_button" value="Add New Course">
         </form>
     </div> 
 <button class="button"> 
