@@ -18,7 +18,7 @@
     <div class="wrapper fadeInDown">
   <div id="formContent">
     <!-- Login Form -->
-    <form method="GET" action="InstructorLoginServlet">
+    <form method="POST" action="InstructorLoginServlet">
       <label for="login" style="color: #FFCC00">Username</label>
       <input type="text" id="login" class="fadeIn second" name="username">
       <label for="password" style="color: #FFCC00">Password</label>
