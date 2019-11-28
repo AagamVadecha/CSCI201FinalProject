@@ -22,20 +22,16 @@ public class CourseManager {
         ArrayList<String> allCourses = new ArrayList<String>();
         PreparedStatement ps = null;
         Connection conn = null;
-        Statement st = null;
         ResultSet rs = null;
 
         // TODO - UPDATE WITH FINAL DATABASE
-        //String sql = "jdbc:mysql://google/Hmwk4Database?cloudSqlInstance=cs201-lab:us-central1:sql-db-2&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=root&password=111";
-        
-        String sql = "jdbc:mysql://google/OHScheduler"
-            + "?cloudSqlInstance=zhoue-csci201l-lab7:us-central1:sql-db-lab7"
-            + "&socketFactory=com.google.cloud.sql.mysql.SocketFactory" + "&useSSL=false"
-            + "&user=zhoue&password=password1234";
-        
+        String sql = "jdbc:mysql://google/Hmwk4Database?cloudSqlInstance=cs201-lab:us-central1:sql-db-2&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=root&password=111";
+//      String sql = "jdbc:mysql://google/OHScheduler"
+//              + "?cloudSqlInstance=zhoue-csci201l-lab7:us-central1:sql-db-lab7"
+//              + "&socketFactory=com.google.cloud.sql.mysql.SocketFactory" + "&useSSL=false"
+//              + "&user=zhoue&password=password1234";
         try {
             conn = DriverManager.getConnection(sql);
-            st = conn.createStatement();
 
             // selecting all courses from 'course' table;
             String statement = "select * from course";
@@ -73,26 +69,25 @@ public class CourseManager {
 
     /*
      * This function returns an ArrayList of strings containing the courses for a specific
-     * instructor Parameters: instructor's email
+     * instructor 
+     * Parameters: instructor's email
      */
     public static ArrayList<String> getInstructorCourses(String username) {
+        System.out.println("In course manager get instructor courses for: " + username);
         ArrayList<String> instructorCourses = new ArrayList<String>();
         PreparedStatement ps = null;
         Connection conn = null;
-        Statement st = null;
         ResultSet rs = null;
 
         // TODO - UPDATE WITH FINAL DATABASE
-        //String sql = "jdbc:mysql://google/Hmwk4Database?cloudSqlInstance=cs201-lab:us-central1:sql-db-2&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=root&password=111";
-        
-        String sql = "jdbc:mysql://google/OHScheduler"
-            + "?cloudSqlInstance=zhoue-csci201l-lab7:us-central1:sql-db-lab7"
-            + "&socketFactory=com.google.cloud.sql.mysql.SocketFactory" + "&useSSL=false"
-            + "&user=zhoue&password=password1234";
+        String sql = "jdbc:mysql://google/Hmwk4Database?cloudSqlInstance=cs201-lab:us-central1:sql-db-2&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=root&password=111";
+//      String sql = "jdbc:mysql://google/OHScheduler"
+//              + "?cloudSqlInstance=zhoue-csci201l-lab7:us-central1:sql-db-lab7"
+//              + "&socketFactory=com.google.cloud.sql.mysql.SocketFactory" + "&useSSL=false"
+//              + "&user=zhoue&password=password1234";
         
         try {
             conn = DriverManager.getConnection(sql);
-            st = conn.createStatement();
 
             // get instructor's id
             String statement =
@@ -109,7 +104,8 @@ public class CourseManager {
             } else {
                 throw new SQLException("Could not retrieve instructor id");
             }
-
+            ps.close();
+            
             // select instructor's courses
             statement =
                 "select c.courseName from course c inner join instructorCourse ic on ic.instructorID="
@@ -161,20 +157,17 @@ public class CourseManager {
 */
         PreparedStatement ps = null;
         Connection conn = null;
-        Statement st = null;
         ResultSet rs = null;
 
         // TODO - UPDATE WITH FINAL DATABASE
-        //String sql = "jdbc:mysql://google/Hmwk4Database?cloudSqlInstance=cs201-lab:us-central1:sql-db-2&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=root&password=111";
-        
-        String sql = "jdbc:mysql://google/OHScheduler"
-            + "?cloudSqlInstance=zhoue-csci201l-lab7:us-central1:sql-db-lab7"
-            + "&socketFactory=com.google.cloud.sql.mysql.SocketFactory" + "&useSSL=false"
-            + "&user=zhoue&password=password1234";
+        String sql = "jdbc:mysql://google/Hmwk4Database?cloudSqlInstance=cs201-lab:us-central1:sql-db-2&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=root&password=111";
+//      String sql = "jdbc:mysql://google/OHScheduler"
+//              + "?cloudSqlInstance=zhoue-csci201l-lab7:us-central1:sql-db-lab7"
+//              + "&socketFactory=com.google.cloud.sql.mysql.SocketFactory" + "&useSSL=false"
+//              + "&user=zhoue&password=password1234";
+       
         try {
             conn = DriverManager.getConnection(sql);
-            st = conn.createStatement();
-
             String statement =
                 "select courseID from instructorCourse where instructorID=(select instructorID from instructor where username=\'"
                     + username + "\')";
@@ -184,8 +177,10 @@ public class CourseManager {
 
             if (success) {
                 rs = ps.getResultSet();
-                while (rs.next()) {
+                ps.close();
+                while (rs.next()) {  // iterate through all courses that instructor is teaching 
                     int courseID = rs.getInt("courseID");
+                    rs.close(); 
                     String statement2 =
                         "select courseName, day, hourStart, hourEnd from officeHour o inner join course c on c.courseID=o.courseID and c.courseID="
                             + courseID;
@@ -194,7 +189,7 @@ public class CourseManager {
 
                     if (success) {
                         rs = ps.getResultSet();
-                        while (rs.next()) {
+                        while (rs.next()) {  // iterate through all of instructor's office hours for that course 
                             String oh = rs.getString("courseName") + ": " + rs.getString("day") + " Start: " + rs.getInt("hourStart")
                                 + " End: " + rs.getInt("hourEnd"); 
                            /* courseNames.add(rs.getString("courseName"));
@@ -241,20 +236,17 @@ public class CourseManager {
 */
         PreparedStatement ps = null;
         Connection conn = null;
-        Statement st = null;
         ResultSet rs = null;
 
         // TODO - UPDATE WITH FINAL DATABASE
-        //String sql = "jdbc:mysql://google/Hmwk4Database?cloudSqlInstance=cs201-lab:us-central1:sql-db-2&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=root&password=111";
+        String sql = "jdbc:mysql://google/Hmwk4Database?cloudSqlInstance=cs201-lab:us-central1:sql-db-2&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=root&password=111";
         
-        String sql = "jdbc:mysql://google/OHScheduler"
-            + "?cloudSqlInstance=zhoue-csci201l-lab7:us-central1:sql-db-lab7"
-            + "&socketFactory=com.google.cloud.sql.mysql.SocketFactory" + "&useSSL=false"
-            + "&user=zhoue&password=password1234";
+//        String sql = "jdbc:mysql://google/OHScheduler"
+//            + "?cloudSqlInstance=zhoue-csci201l-lab7:us-central1:sql-db-lab7"
+//            + "&socketFactory=com.google.cloud.sql.mysql.SocketFactory" + "&useSSL=false"
+//            + "&user=zhoue&password=password1234";
         try {
             conn = DriverManager.getConnection(sql);
-            st = conn.createStatement();
-
             String statement =
                 "select day, hourStart, hourEnd from officeHour where courseID=" + courseID;
             ps = conn.prepareStatement(statement);
@@ -262,7 +254,7 @@ public class CourseManager {
 
             if (success) {
                 rs = ps.getResultSet();
-                while (rs.next()) {
+                while (rs.next()) {  // iterate through all course's office hours 
                     /*day.add(rs.getString("day"));
                     hourStart.add(Integer.toString(rs.getInt("hourStart")));
                     hourEnd.add(Integer.toString(rs.getInt("hourEnd")));
