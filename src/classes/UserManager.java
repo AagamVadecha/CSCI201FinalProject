@@ -5,75 +5,37 @@ import java.util.ArrayList;
 
 public class UserManager {
     public static boolean register(String username, String password, String fname, String lname, int id) {
-        //going to Use Elizabeth's SQL code
         Connection conn = null;
         PreparedStatement ps = null;
-        String sql = "jdbc:mysql://google/OHScheduler"
-                + "?cloudSqlInstance=zhoue-csci201l-lab7:us-central1:sql-db-lab7"
-                + "&socketFactory=com.google.cloud.sql.mysql.SocketFactory" + "&useSSL=false"
-                + "&user=zhoue&password=password1234";
+        String sql = "jdbc:mysql://google/Hmwk4Database?cloudSqlInstance=cs201-lab:us-central1:sql-db-2&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=root&password=111";
+//        String sql = "jdbc:mysql://google/OHScheduler"
+//                + "?cloudSqlInstance=zhoue-csci201l-lab7:us-central1:sql-db-lab7"
+//                + "&socketFactory=com.google.cloud.sql.mysql.SocketFactory" + "&useSSL=false"
+//                + "&user=zhoue&password=password1234";
         try {
             Class.forName("com.mysql.jdbc.Driver");
             conn = DriverManager.getConnection(sql);
             String statement = "";
-            String statement1 = "SELECT * FROM instructor where username = ?";
-            String statement2 = "SELECT * FROM student where username = ?";
-            ps = conn.prepareStatement(statement1);
-            ps.setString(1,username);
-            ResultSet rs = ps.executeQuery();
-            if(rs.next()) {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (ps != null) {
-                    ps.close();
-                }
-                if (conn != null) {
-                    conn.close();
-                }
-                return false;
-            }
-            if (rs != null) {
-                rs.close();
-            }
-            if (ps != null) {
-                ps.close();
-            }
-            ps = conn.prepareStatement(statement2);
-            ps.setString(1,username);
-            rs = ps.executeQuery();
-            if(rs.next()) {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (ps != null) {
-                    ps.close();
-                }
-                if (conn != null) {
-                    conn.close();
-                }
-                return false;
-            }
-            if (rs != null) {
-                rs.close();
-            }
-            if (ps != null) {
-                ps.close();
-            }
+          
             if (id == 2)
                 statement = "INSERT INTO instructor(username,password,fName,lName) VALUES(?,?,?,?)";
             else if (id == 1)
-                statement = "INSERT INTO student(username,password,fName,lName) VALUES(?,?,?,?)";
+                statement = "INSERT INTO student(username,password,fName,lName,strikes) VALUES(?,?,?,?,?)";
             ps = conn.prepareStatement(statement);
             ps.setString(1, username);
             ps.setString(2, password);
             ps.setString(3, fname);
             ps.setString(4, lname);
+            if (id==1) {
+                ps.setInt(5, 0);
+            }
             ps.executeUpdate();
         } catch (SQLException sqle) {
-            System.out.println(sqle.getMessage());
+            System.out.println("In UserManager-Register" + " " + sqle.getMessage());
+            return false;
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+            return false;
         } finally {
             try {
                 if (ps != null) {
@@ -93,11 +55,11 @@ public class UserManager {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String sql = "jdbc:mysql://google/OHScheduler"
-                + "?cloudSqlInstance=zhoue-csci201l-lab7:us-central1:sql-db-lab7"
-                + "&socketFactory=com.google.cloud.sql.mysql.SocketFactory" + "&useSSL=false"
-                + "&user=zhoue&password=password1234";
-
+        String sql = "jdbc:mysql://google/Hmwk4Database?cloudSqlInstance=cs201-lab:us-central1:sql-db-2&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=root&password=111";
+//      String sql = "jdbc:mysql://google/OHScheduler"
+//              + "?cloudSqlInstance=zhoue-csci201l-lab7:us-central1:sql-db-lab7"
+//              + "&socketFactory=com.google.cloud.sql.mysql.SocketFactory" + "&useSSL=false"
+//              + "&user=zhoue&password=password1234";
         try {
             Class.forName("com.mysql.jdbc.Driver");
             conn = DriverManager.getConnection(sql);
@@ -109,8 +71,6 @@ public class UserManager {
             ps = conn.prepareStatement(statement); // prepare statement
             ps.setString(1, username);
             ps.setString(2,password);
-//			ps.setInt(1,  portNum);
-//			ps.setString(2, IPAddress);
             rs = ps.executeQuery(); // execute query, return result set
             if(!rs.next()) {
                 if (rs != null) {
@@ -126,8 +86,10 @@ public class UserManager {
             }
         } catch (SQLException sqle) {
             System.out.println(sqle.getMessage());
+            return false; 
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+            return false;
         } finally {
             try {
                 if (rs != null) {
@@ -151,10 +113,11 @@ public class UserManager {
             Connection conn = null;
             PreparedStatement ps = null;
             ResultSet rs = null;
-            String sql = "jdbc:mysql://google/OHScheduler"
-                    + "?cloudSqlInstance=zhoue-csci201l-lab7:us-central1:sql-db-lab7"
-                    + "&socketFactory=com.google.cloud.sql.mysql.SocketFactory" + "&useSSL=false"
-                    + "&user=zhoue&password=password1234";
+            String sql = "jdbc:mysql://google/Hmwk4Database?cloudSqlInstance=cs201-lab:us-central1:sql-db-2&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=root&password=111";
+//          String sql = "jdbc:mysql://google/OHScheduler"
+//                  + "?cloudSqlInstance=zhoue-csci201l-lab7:us-central1:sql-db-lab7"
+//                  + "&socketFactory=com.google.cloud.sql.mysql.SocketFactory" + "&useSSL=false"
+//                  + "&user=zhoue&password=password1234";
             try {
                 Class.forName("com.mysql.jdbc.Driver");
                 conn = DriverManager.getConnection(sql);
