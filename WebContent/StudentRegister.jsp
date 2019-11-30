@@ -8,7 +8,7 @@
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<link rel="stylesheet" href="User.css">
 	<meta charset="ISO-8859-1">
-	<title>Register</title>
+	<title>Student Register</title>
 	<%
     String username = (String) request.getAttribute("username");
     String password = (String) request.getAttribute("password");
