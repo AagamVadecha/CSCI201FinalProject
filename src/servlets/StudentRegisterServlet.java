@@ -20,7 +20,8 @@ public class StudentRegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	protected void service (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//Get username and password from form
-	    	HttpSession session = request.getSession();
+		System.out.println("Is this working)");
+	    HttpSession session = request.getSession();
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		String first_name = request.getParameter("first_name");
@@ -28,6 +29,7 @@ public class StudentRegisterServlet extends HttpServlet {
 		String confirmpw = request.getParameter("confirmpassword");
 		String next = "/Student.jsp";
 		if(confirmpw.trim().equals(password.trim())) {
+			System.out.println("GETS HERE");
 			if (UserManager.register(username, password, first_name, last_name, 1)) {
 				ArrayList<String> temp = UserManager.login(username, password,1);
 				session.setAttribute("userType", "student");
@@ -37,8 +39,8 @@ public class StudentRegisterServlet extends HttpServlet {
 				session.setAttribute("username", temp.get(1));
 				session.setAttribute("password", temp.get(2));
 				session.setAttribute("strikes", temp.get(5));
-//				RequestDispatcher rd = request.getRequestDispatcher("/Student.jsp");
-//				rd.forward(request, response);
+				RequestDispatcher rd = request.getRequestDispatcher("/Student.jsp");
+				rd.forward(request, response);
 				
 			}
 			else {

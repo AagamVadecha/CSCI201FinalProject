@@ -20,7 +20,7 @@ public class UserManager {
             if (id == 2)
                 statement = "INSERT INTO instructor(username,password,fName,lName) VALUES(?,?,?,?)";
             else if (id == 1)
-                statement = "INSERT INTO student(username,password,fName,lName,strikes) VALUES(?,?,?,?,?)";
+                statement = "INSERT INTO student(username,password,fName,lName,strike) VALUES(?,?,?,?,?)";
             ps = conn.prepareStatement(statement);
             ps.setString(1, username);
             ps.setString(2, password);
