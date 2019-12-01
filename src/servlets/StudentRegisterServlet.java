@@ -17,10 +17,36 @@ import java.util.ArrayList;
  */
 @WebServlet("/StudentRegisterServlet")
 public class StudentRegisterServlet extends HttpServlet {
+//
+	//TEST TO SEE IF THE SQL WORKS
+//	public static void main(String[] args){
+//		System.out.println("Is this working)");
+//		String username = "aagamva@gmail.com";
+//		String password = "123";
+//		String first_name = "Aagam";
+//		String last_name = "Vadecha";
+//		String confirmpw = "123";
+//		if(confirmpw.equals(password)) {
+//			System.out.println("GETS HERE");
+//			if (UserManager.register(username, password, first_name, last_name, 1)) {
+//				ArrayList<String> temp = UserManager.login(username, password,1);
+//				System.out.println("id: " + temp.get(0) + "\nfName: " + temp.get(3) + "\nlName: " + temp.get(4) + "\nusername: " + temp.get(1)
+//						+ "\npassword: " + temp.get(2) + "\nStrikes: " + temp.get(5));
+//			}
+//			else {
+//				System.out.println("Register failed");
+//			}
+//		}
+//		else {
+//			System.out.println("passwords don't match");
+//		}
+//
+//	}
+
 	private static final long serialVersionUID = 1L;
 	protected void service (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//Get username and password from form
-		System.out.println("Is this working)");
+//		System.out.println("Is this working)");
 	    HttpSession session = request.getSession();
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
@@ -29,7 +55,7 @@ public class StudentRegisterServlet extends HttpServlet {
 		String confirmpw = request.getParameter("confirmpassword");
 		String next = "/Student.jsp";
 		if(confirmpw.trim().equals(password.trim())) {
-			System.out.println("GETS HERE");
+//			System.out.println("GETS HERE");
 			if (UserManager.register(username, password, first_name, last_name, 1)) {
 				ArrayList<String> temp = UserManager.login(username, password,1);
 				session.setAttribute("userType", "student");
@@ -41,7 +67,7 @@ public class StudentRegisterServlet extends HttpServlet {
 				session.setAttribute("strikes", temp.get(5));
 				RequestDispatcher rd = request.getRequestDispatcher("/Student.jsp");
 				rd.forward(request, response);
-				
+
 			}
 			else {
 			    next = "/StudentRegister.jsp";
@@ -51,7 +77,7 @@ public class StudentRegisterServlet extends HttpServlet {
 		    next = "/StudentRegister.jsp";
 		}
 		RequestDispatcher dispatch = getServletContext().getRequestDispatcher(next);
-        
+
 		try {
 		    dispatch.forward(request, response);
 		} catch(IOException | ServletException e) {
