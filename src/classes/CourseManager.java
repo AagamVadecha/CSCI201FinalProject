@@ -1,18 +1,11 @@
 package classes;
 
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpSession;
 
 public class CourseManager {
+    static String sql ="jdbc:mysql://google/OHScheduler?cloudSqlInstance=tough-shard-260720:us-west1:csci201final&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false";
+
 
     /*
      * This function returns an ArrayList of strings containing all the course names that exist in
@@ -25,13 +18,13 @@ public class CourseManager {
         ResultSet rs = null;
 
         // TODO - UPDATE WITH FINAL DATABASE
-        String sql = "jdbc:mysql://google/Hmwk4Database?cloudSqlInstance=cs201-lab:us-central1:sql-db-2&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=root&password=111";
+//        String sql = "jdbc:mysql://google/Hmwk4Database?cloudSqlInstance=cs201-lab:us-central1:sql-db-2&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=root&password=111";
 //      String sql = "jdbc:mysql://google/OHScheduler"
 //              + "?cloudSqlInstance=zhoue-csci201l-lab7:us-central1:sql-db-lab7"
 //              + "&socketFactory=com.google.cloud.sql.mysql.SocketFactory" + "&useSSL=false"
 //              + "&user=zhoue&password=password1234";
         try {
-            conn = DriverManager.getConnection(sql);
+            conn = DriverManager.getConnection(sql, "root", "root");
 
             // selecting all courses from 'course' table;
             String statement = "select * from course";
@@ -80,14 +73,14 @@ public class CourseManager {
         ResultSet rs = null;
 
         // TODO - UPDATE WITH FINAL DATABASE
-        String sql = "jdbc:mysql://google/Hmwk4Database?cloudSqlInstance=cs201-lab:us-central1:sql-db-2&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=root&password=111";
-//      String sql = "jdbc:mysql://google/OHScheduler"
+//        String sql = "jdbc:mysql://google/Hmwk4Database?cloudSqlInstance=cs201-lab:us-central1:sql-db-2&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=root&password=111";
+////      String sql = "jdbc:mysql://google/OHScheduler"
 //              + "?cloudSqlInstance=zhoue-csci201l-lab7:us-central1:sql-db-lab7"
 //              + "&socketFactory=com.google.cloud.sql.mysql.SocketFactory" + "&useSSL=false"
 //              + "&user=zhoue&password=password1234";
         
         try {
-            conn = DriverManager.getConnection(sql);
+            conn = DriverManager.getConnection(sql, "root", "root");
 
             // get instructor's id
             String statement =
@@ -159,15 +152,15 @@ public class CourseManager {
         Connection conn = null;
         ResultSet rs = null;
 
-        // TODO - UPDATE WITH FINAL DATABASE
-        String sql = "jdbc:mysql://google/Hmwk4Database?cloudSqlInstance=cs201-lab:us-central1:sql-db-2&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=root&password=111";
-//      String sql = "jdbc:mysql://google/OHScheduler"
+//        // TODO - UPDATE WITH FINAL DATABASE
+//        String sql = "jdbc:mysql://google/Hmwk4Database?cloudSqlInstance=cs201-lab:us-central1:sql-db-2&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=root&password=111";
+////      String sql = "jdbc:mysql://google/OHScheduler"
 //              + "?cloudSqlInstance=zhoue-csci201l-lab7:us-central1:sql-db-lab7"
 //              + "&socketFactory=com.google.cloud.sql.mysql.SocketFactory" + "&useSSL=false"
 //              + "&user=zhoue&password=password1234";
        
         try {
-            conn = DriverManager.getConnection(sql);
+            conn = DriverManager.getConnection(sql, "root","root");
             String statement =
                 "select courseID from instructorCourse where instructorID=(select instructorID from instructor where username=\'"
                     + username + "\')";
@@ -239,14 +232,14 @@ public class CourseManager {
         ResultSet rs = null;
 
         // TODO - UPDATE WITH FINAL DATABASE
-        String sql = "jdbc:mysql://google/Hmwk4Database?cloudSqlInstance=cs201-lab:us-central1:sql-db-2&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=root&password=111";
-        
+//        String sql = "jdbc:mysql://google/Hmwk4Database?cloudSqlInstance=cs201-lab:us-central1:sql-db-2&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=root&password=111";
+//
 //        String sql = "jdbc:mysql://google/OHScheduler"
 //            + "?cloudSqlInstance=zhoue-csci201l-lab7:us-central1:sql-db-lab7"
 //            + "&socketFactory=com.google.cloud.sql.mysql.SocketFactory" + "&useSSL=false"
 //            + "&user=zhoue&password=password1234";
         try {
-            conn = DriverManager.getConnection(sql);
+            conn = DriverManager.getConnection(sql, "root", "root");
             String statement =
                 "select day, hourStart, hourEnd from officeHour where courseID=" + courseID;
             ps = conn.prepareStatement(statement);
