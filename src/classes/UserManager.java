@@ -13,7 +13,7 @@ public class UserManager {
 //                + "&socketFactory=com.google.cloud.sql.mysql.SocketFactory" + "&useSSL=false";
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            conn = DriverManager.getConnection(sql, "zhoue", "password1234");
+            conn = DriverManager.getConnection(sql);
             String statement = "";
           
             if (id == 2)
