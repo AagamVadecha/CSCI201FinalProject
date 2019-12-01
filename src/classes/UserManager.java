@@ -55,14 +55,14 @@ public class UserManager {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String sql = "jdbc:mysql://google/Hmwk4Database?cloudSqlInstance=cs201-lab:us-central1:sql-db-2&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=root&password=111";
-//      String sql = "jdbc:mysql://google/OHScheduler"
+        String sql ="jdbc:mysql://google/OHScheduler?cloudSqlInstance=tough-shard-260720:us-west1:csci201final&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false";
+//        String sql = "jdbc:mysql://google/OHScheduler"
 //              + "?cloudSqlInstance=zhoue-csci201l-lab7:us-central1:sql-db-lab7"
 //              + "&socketFactory=com.google.cloud.sql.mysql.SocketFactory" + "&useSSL=false"
 //              + "&user=zhoue&password=password1234";
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            conn = DriverManager.getConnection(sql);
+            conn = DriverManager.getConnection(sql, "root","root");
             String statement ="";
             if(id == 2)
                 statement = "SELECT * FROM instructor where username = ?  AND password = ?";
