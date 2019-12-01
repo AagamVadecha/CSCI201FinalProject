@@ -2,9 +2,6 @@ package servlets;
 
 import classes.UserManager;
 
-import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Servlet implementation class InstructorLoginServlet
@@ -38,6 +37,7 @@ public class InstructorLoginServlet extends HttpServlet {
 			}
 			else {
 			    next = "/InstructorLogin.jsp";
+			    // TODO - ERROR MESSAGE
 			}
 		}else{
 		    next = "/InstructorLogin.jsp";
@@ -47,11 +47,9 @@ public class InstructorLoginServlet extends HttpServlet {
         
         try {
             dispatch.forward(request, response);
-        } catch(IOException e) {
+        } catch(IOException | ServletException e) {
             e.printStackTrace();
-        } catch (ServletException e) {
-            e.printStackTrace();
-        } 
+        }
 	}
 }
 
