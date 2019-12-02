@@ -17,15 +17,15 @@ import java.util.ArrayList;
  */
 @WebServlet("/StudentRegisterServlet")
 public class StudentRegisterServlet extends HttpServlet {
-//
-	//TEST TO SEE IF THE SQL WORKS
+
+//	TEST TO SEE IF THE SQL WORKS
 //	public static void main(String[] args){
-//		System.out.println("Is this working)");
+//		System.out.println("Is this working");
 //		String username = "aagamva@gmail.com";
 //		String password = "123";
 //		String first_name = "Aagam";
 //		String last_name = "Vadecha";
-//		String confirmpw = "123";
+//		String confirmpw = "1234";
 //		if(confirmpw.equals(password)) {
 //			System.out.println("GETS HERE");
 //			if (UserManager.register(username, password, first_name, last_name, 1)) {
@@ -34,7 +34,7 @@ public class StudentRegisterServlet extends HttpServlet {
 //						+ "\npassword: " + temp.get(2) + "\nStrikes: " + temp.get(5));
 //			}
 //			else {
-//				System.out.println("Register failed");
+//				System.out.println("Registration failed bc user probably already exists");
 //			}
 //		}
 //		else {
