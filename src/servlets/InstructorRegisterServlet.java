@@ -27,25 +27,27 @@ public class InstructorRegisterServlet extends HttpServlet {
 		String last_name = request.getParameter("last_name");
 		String confirmpw = request.getParameter("confirmpassword");
 		String next = "/Instructor.jsp";
-		
-		if(confirmpw.trim().equals(password.trim())) {
-			if (UserManager.register(username, password, first_name, last_name, 2)) {
-				ArrayList<String> temp = UserManager.login(username,password,2);
-				session.setAttribute("userType", "instructor");
-				session.setAttribute("id", temp.get(0));
-				session.setAttribute("first_name", temp.get(3));
-				session.setAttribute("last_name", temp.get(4));
-				session.setAttribute("username",temp.get(1));
-				session.setAttribute("password",temp.get(2));
+		if(username.matches("^(.+)@(.+)(.com|.edu|.net)$") ) {
+			if (confirmpw.trim().equals(password.trim())) {
+				if (UserManager.register(username, password, first_name, last_name, 2)) {
+					ArrayList<String> temp = UserManager.login(username, password, 2);
+					session.setAttribute("userType", "instructor");
+					session.setAttribute("id", temp.get(0));
+					session.setAttribute("first_name", temp.get(3));
+					session.setAttribute("last_name", temp.get(4));
+					session.setAttribute("username", temp.get(1));
+					session.setAttribute("password", temp.get(2));
+				} else {
+					next = "/InstructorRegister.jsp";
+					//TODO -ERROR MESSAGE - INSTRUCTOR ALREADY EXISTS IN DB
+				}
+			} else {
+				next = "/InstructorRegister.jsp";
+				//TODO - ERROR MESSAGE - PASSWORDS DO NOT MATCH
 			}
-			else {
-			    next = "/InstructorRegister.jsp";
-			    //TODO -ERROR MESSAGE -
-			}
-		}
-		else {
-		    next = "/InstructorRegister.jsp";
-		    //TODO - ERROR MESSAGE - PASSWORDS DO NOT MATCH
+		}else{
+			next = "/InstructorRegister.jsp";
+			//TODO - ERROR MESSAGE - USERNAME IS NOT AN EMAIL
 		}
 		RequestDispatcher dispatch = getServletContext().getRequestDispatcher(next);
         

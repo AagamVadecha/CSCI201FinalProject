@@ -54,27 +54,32 @@ public class StudentRegisterServlet extends HttpServlet {
 		String last_name = request.getParameter("last_name");
 		String confirmpw = request.getParameter("confirmpassword");
 		String next = "/Student.jsp";
-		if(confirmpw.trim().equals(password.trim())) {
+		if(username.matches("^(.+)@(.+)(.com|.edu|.net)$") ) {
+			if (confirmpw.trim().equals(password.trim())) {
 //			System.out.println("GETS HERE");
-			if (UserManager.register(username, password, first_name, last_name, 1)) {
-				ArrayList<String> temp = UserManager.login(username, password,1);
-				session.setAttribute("userType", "student");
-				session.setAttribute("id", temp.get(0));
-				session.setAttribute("first_name", temp.get(3));
-				session.setAttribute("last_name", temp.get(4));
-				session.setAttribute("username", temp.get(1));
-				session.setAttribute("password", temp.get(2));
-				session.setAttribute("strikes", temp.get(5));
-				RequestDispatcher rd = request.getRequestDispatcher("/Student.jsp");
-				rd.forward(request, response);
+				if (UserManager.register(username, password, first_name, last_name, 1)) {
+					ArrayList<String> temp = UserManager.login(username, password, 1);
+					session.setAttribute("userType", "student");
+					session.setAttribute("id", temp.get(0));
+					session.setAttribute("first_name", temp.get(3));
+					session.setAttribute("last_name", temp.get(4));
+					session.setAttribute("username", temp.get(1));
+					session.setAttribute("password", temp.get(2));
+					session.setAttribute("strikes", temp.get(5));
+					RequestDispatcher rd = request.getRequestDispatcher("/Student.jsp");
+					rd.forward(request, response);
 
+				} else {
+					next = "/StudentRegister.jsp";
+					//TODO - username already exists in db
+				}
+			} else {
+				next = "/StudentRegister.jsp";
+				//TODO - password doesn't match
 			}
-			else {
-			    next = "/StudentRegister.jsp";
-			}
-		}
-		else {
-		    next = "/StudentRegister.jsp";
+		}else {
+			next = "/StudentRegister.jsp";
+			//TODO - username is not an email
 		}
 		RequestDispatcher dispatch = getServletContext().getRequestDispatcher(next);
 

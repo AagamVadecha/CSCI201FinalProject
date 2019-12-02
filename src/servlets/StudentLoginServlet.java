@@ -36,12 +36,9 @@ public class StudentLoginServlet extends HttpServlet {
     			session.setAttribute("password",temp.get(2));
     			session.setAttribute("strikes",temp.get(5));
 			}
-			else {
-			    next = "/StudentLogin.jsp";
-			}
 		}else{
 			next ="/StudentLogin.jsp";
-			// TODO - ERROR MESSAGE
+			// TODO - ERROR MESSAGE USERNAME AND PASSWORD DO NOT EXIST IN DB
 		}
 		
 		RequestDispatcher dispatch = getServletContext().getRequestDispatcher(next);

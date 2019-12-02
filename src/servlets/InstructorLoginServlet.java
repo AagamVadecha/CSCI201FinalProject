@@ -28,20 +28,16 @@ public class InstructorLoginServlet extends HttpServlet {
 		if(UserManager.verify(username,password,2)){
 			ArrayList<String> temp = UserManager.login(username,password,2);
 			if (!temp.isEmpty()) {
-    			session.setAttribute("userType", "teacher");
+    			session.setAttribute("userType", "instructor");
     			session.setAttribute("id", temp.get(0));
     			session.setAttribute("first_name", temp.get(3));
     			session.setAttribute("last_name", temp.get(4));
     			session.setAttribute("username",temp.get(1));
     			session.setAttribute("password",temp.get(2));
 			}
-			else {
-			    next = "/InstructorLogin.jsp";
-			    // TODO - ERROR MESSAGE
-			}
 		}else{
 		    next = "/InstructorLogin.jsp";
-			// TODO - ERROR MESSAGE
+			// TODO - ERROR MESSAGE USERNAME AND PASSWORD DNE IN DB
 		}
 		RequestDispatcher dispatch = getServletContext().getRequestDispatcher(next);
         

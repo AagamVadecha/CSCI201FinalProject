@@ -10,6 +10,7 @@ public class UserManager {
     public static boolean register(String username, String password, String fname, String lname, int id) {
         Connection conn = null;
         PreparedStatement ps = null;
+        ResultSet rs = null;
        // String sql =                //"jdbc:mysql://google/Hmwk4Database?cloudSqlInstance=cs201-lab:us-central1:sql-db-2&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=root&password=111";
 //        String sql = "jdbc:mysql://google/OHScheduler"
 //                + "?cloudSqlInstance=zhoue-csci201l-lab7:us-central1:sql-db-lab7"
@@ -18,6 +19,45 @@ public class UserManager {
             Class.forName("com.mysql.jdbc.Driver");
             conn = DriverManager.getConnection(sql, "root", "root");
             String statement = "";
+            String statement1 = "SELECT * FROM instructor where username = ?";
+            String statement2 =  "SELECT * FROM student where username = ?";
+
+            //check if an instructor already exists with that username
+            ps = conn.prepareStatement(statement1);
+            ps.setString(1, username);
+            rs = ps.executeQuery();
+            if(rs.next()){
+                if (ps != null)
+                    ps.close();
+                if(rs != null)
+                    rs.close();
+                if(conn !=null)
+                    conn.close();
+                return false;
+            }
+            if (ps != null)
+                ps.close();
+            if(rs != null)
+                rs.close();
+
+
+            //check if a student exists with that username
+            ps = conn.prepareStatement(statement2);
+            ps.setString(1, username);
+            rs = ps.executeQuery();
+            if(rs.next()){
+                if (ps != null)
+                    ps.close();
+                if(rs != null)
+                    rs.close();
+                if(conn !=null)
+                    conn.close();
+                return false;
+            }
+            if (ps != null)
+                ps.close();
+            if(rs != null)
+                rs.close();
           
             if (id == 2)
                 statement = "INSERT INTO instructor(username,password,fName,lName) VALUES(?,?,?,?)";
@@ -115,8 +155,7 @@ public class UserManager {
             Connection conn = null;
             PreparedStatement ps = null;
             ResultSet rs = null;
-
-//          String sql = "jdbc:mysql://google/OHScheduler"
+            //          String sql = "jdbc:mysql://google/OHScheduler"
 //                  + "?cloudSqlInstance=zhoue-csci201l-lab7:us-central1:sql-db-lab7"
 //                  + "&socketFactory=com.google.cloud.sql.mysql.SocketFactory" + "&useSSL=false"
 //                  + "&user=zhoue&password=password1234";
