@@ -68,17 +68,19 @@ public class StudentRegisterServlet extends HttpServlet {
 					session.setAttribute("strikes", temp.get(5));
 					RequestDispatcher rd = request.getRequestDispatcher("/Student.jsp");
 					rd.forward(request, response);
-
 				} else {
 					next = "/StudentRegister.jsp";
+					session.setAttribute("error", "Username already exists in our database, please use another email.");
 					//TODO - username already exists in db
 				}
 			} else {
 				next = "/StudentRegister.jsp";
+				session.setAttribute("error", "Unfortunately, either your password field is blank or your confirmation password and actual password are not the same.");
 				//TODO - password doesn't match
 			}
 		}else {
 			next = "/StudentRegister.jsp";
+			session.setAttribute("error","Your username is not an email. Please enter an email in the username field.");
 			//TODO - username is not an email
 		}
 		RequestDispatcher dispatch = getServletContext().getRequestDispatcher(next);

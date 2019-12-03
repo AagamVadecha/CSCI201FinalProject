@@ -60,12 +60,15 @@ public class StudentLoginServlet extends HttpServlet {
     			session.setAttribute("strikes",temp.get(5));
 			}else{
 				next ="/StudentLogin.jsp";
+				session.setAttribute("error", "Unfortunately, this combination of username and password does not exist in our database.");
 				// TODO - USERNAME AND PASSWORD DO NOT EXIST IN DB
 			}
 		}else{
+			next ="/StudentLogin.jsp";
+			session.setAttribute("error", "Unfortunately, you haven't registered yet with this email.");
 			//TODO - USERNAME IS NOT IN DB
 		}
-		
+
 		RequestDispatcher dispatch = getServletContext().getRequestDispatcher(next);
         
         try {

@@ -35,12 +35,14 @@ public class InstructorLoginServlet extends HttpServlet {
     			session.setAttribute("username",temp.get(1));
     			session.setAttribute("hashedPassword",temp.get(2));
 			}else{
-				next = "/InstructorLogin.jsp";
-				// TODO - ERROR MESSAGE USERNAME AND PASSWORD DO NOT EXIST IN DB
+				next ="/InstructorLogin.jsp";
+				session.setAttribute("error", "Unfortunately, this combination of username and password does not exist in our database.");
+				// TODO - USERNAME AND PASSWORD DO NOT EXIST IN DB
 			}
 		}else{
-		    next = "/InstructorLogin.jsp";
-			// TODO - ERROR MESSAGE USERNAME DOES NOT EXIST IN DB
+			next ="/InstructorLogin.jsp";
+			session.setAttribute("error", "Unfortunately, you haven't registered yet with this email.");
+			//TODO - USERNAME IS NOT IN DB
 		}
 		RequestDispatcher dispatch = getServletContext().getRequestDispatcher(next);
         
