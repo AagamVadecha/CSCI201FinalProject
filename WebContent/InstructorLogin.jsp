@@ -16,6 +16,7 @@
 	if ((String)request.getAttribute("error") != null)
 	{
 		errorMsg = (String)request.getAttribute("error");
+		System.out.println("error is " + errorMsg);
 	}
   	%>
 </head>
