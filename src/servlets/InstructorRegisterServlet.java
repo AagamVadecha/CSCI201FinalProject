@@ -28,7 +28,7 @@ public class InstructorRegisterServlet extends HttpServlet {
 		String confirmpw = request.getParameter("confirmpassword");
 		String next = "/Instructor.jsp";
 		if(username.matches("^(.+)@(.+)(.com|.edu|.net)$") ) {
-			if (confirmpw.trim().equals(password.trim())) {
+			if (confirmpw.trim().equals(password.trim()) && password.trim().length() != 0) {
 				if (UserManager.register(username, password, first_name, last_name, 2)) {
 					ArrayList<String> temp = UserManager.login(username, password, 2);
 					session.setAttribute("userType", "instructor");

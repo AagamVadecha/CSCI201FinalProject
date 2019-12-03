@@ -55,7 +55,7 @@ public class StudentRegisterServlet extends HttpServlet {
 		String confirmpw = request.getParameter("confirmpassword");
 		String next = "/Student.jsp";
 		if(username.matches("^(.+)@(.+)(.com|.edu|.net)$") ) {
-			if (confirmpw.trim().equals(password.trim())) {
+			if (confirmpw.trim().equals(password.trim()) && password.trim().length()!=0) {
 //			System.out.println("GETS HERE");
 				if (UserManager.register(username, password, first_name, last_name, 1)) {
 					ArrayList<String> temp = UserManager.login(username, password, 1);
