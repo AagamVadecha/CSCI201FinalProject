@@ -33,11 +33,14 @@ public class InstructorLoginServlet extends HttpServlet {
     			session.setAttribute("first_name", temp.get(3));
     			session.setAttribute("last_name", temp.get(4));
     			session.setAttribute("username",temp.get(1));
-    			session.setAttribute("password",temp.get(2));
+    			session.setAttribute("hashedPassword",temp.get(2));
+			}else{
+				next = "/InstructorLogin.jsp";
+				// TODO - ERROR MESSAGE USERNAME AND PASSWORD DO NOT EXIST IN DB
 			}
 		}else{
 		    next = "/InstructorLogin.jsp";
-			// TODO - ERROR MESSAGE USERNAME AND PASSWORD DNE IN DB
+			// TODO - ERROR MESSAGE USERNAME DOES NOT EXIST IN DB
 		}
 		RequestDispatcher dispatch = getServletContext().getRequestDispatcher(next);
         

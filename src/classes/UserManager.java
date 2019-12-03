@@ -151,13 +151,19 @@ public class UserManager {
             Class.forName("com.mysql.jdbc.Driver");
             conn = DriverManager.getConnection(sql, "root","root");
             String statement ="";
-            if(id == 2)
+/*            if(id == 2)
                 statement = "SELECT * FROM instructor where username = ?  AND password = ?";
             else if(id==1)
-                statement =  "SELECT * FROM student where username = ?  AND password = ?";
+                statement =  "SELECT * FROM student where username = ?  AND password = ?";*/
+            if(id == 2)
+                statement = "SELECT * FROM instructor where username = ?";
+            else if(id==1)
+                statement =  "SELECT * FROM student where username = ?";
+
             ps = conn.prepareStatement(statement); // prepare statement
             ps.setString(1, username);
-            ps.setString(2,getSaltedHash(password));
+//            System.out.println("password: " + getSaltedHash(password));
+//            ps.setString(2,getSaltedHash(password));
             rs = ps.executeQuery(); // execute query, return result set
             if(!rs.next()) {
                 if (rs != null) {
@@ -210,15 +216,23 @@ public class UserManager {
                 Class.forName("com.mysql.jdbc.Driver");
                 conn = DriverManager.getConnection(sql, "root", "root");
                 String statement = "";
+//                if(id == 2)
+//                    statement = "SELECT * FROM instructor where username = ?  AND password = ?";
+//                else if(id==1)
+//                    statement =  "SELECT * FROM student where username = ?  AND password = ?";
+
                 if(id == 2)
-                    statement = "SELECT * FROM instructor where username = ?  AND password = ?";
+                    statement = "SELECT * FROM instructor where username = ?";
                 else if(id==1)
-                    statement =  "SELECT * FROM student where username = ?  AND password = ?";
+                    statement =  "SELECT * FROM student where username = ?";
+
                 ps = conn.prepareStatement(statement); // prepare statement
                 ps.setString(1, username);
-                ps.setString(2,getSaltedHash(password));
+//                ps.setString(2,getSaltedHash(password));
                 rs = ps.executeQuery(); // execute query, return result set
                 if(rs.next()){
+                    if(!check(password,rs.getString(3)))
+                        return ans;
                     ans.add(Integer.toString(rs.getInt(1)));
                     ans.add(rs.getString(2));
                     ans.add(rs.getString(3));

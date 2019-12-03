@@ -19,29 +19,29 @@ import java.util.ArrayList;
 public class StudentRegisterServlet extends HttpServlet {
 
 //	TEST TO SEE IF THE SQL WORKS
-//	public static void main(String[] args){
-//		System.out.println("Is this working");
-//		String username = "aagamva@gmail.com";
-//		String password = "123";
-//		String first_name = "Aagam";
-//		String last_name = "Vadecha";
-//		String confirmpw = "1234";
-//		if(confirmpw.equals(password)) {
-//			System.out.println("GETS HERE");
-//			if (UserManager.register(username, password, first_name, last_name, 1)) {
-//				ArrayList<String> temp = UserManager.login(username, password,1);
-//				System.out.println("id: " + temp.get(0) + "\nfName: " + temp.get(3) + "\nlName: " + temp.get(4) + "\nusername: " + temp.get(1)
-//						+ "\npassword: " + temp.get(2) + "\nStrikes: " + temp.get(5));
-//			}
-//			else {
-//				System.out.println("Registration failed bc user probably already exists");
-//			}
-//		}
-//		else {
-//			System.out.println("passwords don't match");
-//		}
-//
-//	}
+	public static void main(String[] args){
+		System.out.println("Is this working");
+		String username = "aagamv31@gmail.com";
+		String password = "1234";
+		String first_name = "Aagam";
+		String last_name = "Vadecha";
+		String confirmpw = "1234";
+		if(confirmpw.equals(password)) {
+			System.out.println("GETS HERE");
+			if (UserManager.register(username, password, first_name, last_name, 1)) {
+				ArrayList<String> temp = UserManager.login(username, password,1);
+				System.out.println("id: " + temp.get(0) + "\nfName: " + temp.get(3) + "\nlName: " + temp.get(4) + "\nusername: " + temp.get(1)
+						+ "\npassword: " + temp.get(2) + "\nStrikes: " + temp.get(5));
+			}
+			else {
+				System.out.println("Registration failed bc user probably already exists");
+			}
+		}
+		else {
+			System.out.println("passwords don't match");
+		}
+
+	}
 
 	private static final long serialVersionUID = 1L;
 	protected void service (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -64,7 +64,7 @@ public class StudentRegisterServlet extends HttpServlet {
 					session.setAttribute("first_name", temp.get(3));
 					session.setAttribute("last_name", temp.get(4));
 					session.setAttribute("username", temp.get(1));
-					session.setAttribute("password", temp.get(2));
+					session.setAttribute("hashedPassword", temp.get(2));
 					session.setAttribute("strikes", temp.get(5));
 					RequestDispatcher rd = request.getRequestDispatcher("/Student.jsp");
 					rd.forward(request, response);

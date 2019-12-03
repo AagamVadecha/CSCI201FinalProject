@@ -36,7 +36,7 @@ public class InstructorRegisterServlet extends HttpServlet {
 					session.setAttribute("first_name", temp.get(3));
 					session.setAttribute("last_name", temp.get(4));
 					session.setAttribute("username", temp.get(1));
-					session.setAttribute("password", temp.get(2));
+					session.setAttribute("hashedPassword", temp.get(2));
 				} else {
 					next = "/InstructorRegister.jsp";
 					//TODO -ERROR MESSAGE - INSTRUCTOR ALREADY EXISTS IN DB
