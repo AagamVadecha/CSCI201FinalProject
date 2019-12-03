@@ -15,6 +15,11 @@
     String confirmpassword = (String) request.getAttribute("confirmpassword");
     String first_name = (String) request.getAttribute("first_name");
     String last_name = (String) request.getAttribute("last_name");
+    String errorMsg = "";
+	if ((String)request.getAttribute("error") != null)
+	{
+		errorMsg = (String)request.getAttribute("error");
+	}
   	%>
 </head>
 <body>
@@ -34,6 +39,7 @@
       <label for="confirmpassword" style="color: #FFCC00">Confirm Password</label>
       <input type="password" id="confirmpw" class="fadeIn third" name="confirmpassword">
       <input type="submit" class="fadeIn fourth" value="Register">
+        <%= errorMsg %>
     </form>
   </div>
 </div>

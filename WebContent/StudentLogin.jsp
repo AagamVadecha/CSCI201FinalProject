@@ -12,6 +12,11 @@
 	<%
     String username = (String) request.getAttribute("username");
     String password = (String) request.getAttribute("password");
+    String errorMsg = "";
+	if ((String)request.getAttribute("error") != null)
+	{
+		errorMsg = (String)request.getAttribute("error");
+	}
   	%>
 </head>
 <body>
@@ -25,6 +30,7 @@
       <label for="password" style="color: #FFCC00">Password</label>
       <input type="password" id="password" class="fadeIn third" name="password" >
       <input type="submit" class="fadeIn fourth" value="Log In">
+       <%= errorMsg %>
     </form>
   </div>
 </div>
