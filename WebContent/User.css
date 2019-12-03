@@ -1,15 +1,35 @@
 @charset "UTF-8";
 body 
  {
-    background-color: #990000;
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
     text-decoration: none;
  }
+ html {
+    height: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background: #990000;
+    background-repeat:no-repeat;
+    background: radial-gradient(#990000, #600);
+    
+    background:-moz-radial-gradient(center, ellipse cover, #d00 0%, #600 100%);
+	background:-webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, #d00), color-stop(100%, #600));
+	background:-webkit-radial-gradient(center, ellipse cover, #d00 0%, #600 100%);
+	background:-o-radial-gradient(center, ellipse cover, #d00 0%, #600 100%);
+	background:-ms-radial-gradient(center, ellipse cover, #d00 0%, #600 100%);
+	background:radial-gradient(ellipse at center, #d00 0%, #600 100%);
+}
+
  .header{
 	top: 84px;
 	left: 1000px;
-	width: 677px;
-	height: 214px;
+	margin-top: 100px;
+	margin-left: 449px;
+	width: 700px;
+	font-size: 30px;
+	height: auto;
 	font: Regular 161px/214px Segoe UI;
 	letter-spacing: 0;
 	color: #FFFFFF;
@@ -20,6 +40,8 @@ body
  	  border-radius: 3px;
  	  width: 120px;
  	  height: 40px;
+ 	  margin-left: 210px;
+ 	  margin-top: 130px;
  }
  .guest-button{
  	  top: 341px;

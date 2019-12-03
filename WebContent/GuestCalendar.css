@@ -1,11 +1,26 @@
 @charset "UTF-8";
 body 
 {
-   background-color: #990000;
    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
    text-decoration: none;
 }
-
+ html {
+    height: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background: #990000;
+    background-repeat:no-repeat;
+    background: radial-gradient(#990000, #600);
+    
+    background:-moz-radial-gradient(center, ellipse cover, #d00 0%, #600 100%);
+	background:-webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, #d00), color-stop(100%, #600));
+	background:-webkit-radial-gradient(center, ellipse cover, #d00 0%, #600 100%);
+	background:-o-radial-gradient(center, ellipse cover, #d00 0%, #600 100%);
+	background:-ms-radial-gradient(center, ellipse cover, #d00 0%, #600 100%);
+	background:radial-gradient(ellipse at center, #d00 0%, #600 100%);
+}
 h1 {
 	border-style: solid;
 	border-radius: 3px;
@@ -15,6 +30,7 @@ h1 {
     width: 50%;
     text-align: center;
     margin-top: 50px;
+    margin-left: 20px;
 }
 
 #QueueNumber

@@ -10,7 +10,7 @@
 </head>
 <body>
 <div class="header">
-	<h1>Are You A</h1>
+	<h1>Are you a...</h1>
 </div>
 	<div>
 		<button class="button guest-button"> 
