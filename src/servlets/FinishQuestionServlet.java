@@ -43,7 +43,6 @@ public class FinishQuestionServlet extends HttpServlet {
 			String fName=QueueManager.getSecondStudentInfo(courseID).get(1);
 			String courseName=QueueManager.getSecondStudentInfo(courseID).lastElement();
 			javaMailer jm =new javaMailer(username, fName, courseName);
-			jm.start();
 		}
 		
 	}
