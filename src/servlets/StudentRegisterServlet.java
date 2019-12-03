@@ -18,30 +18,30 @@ import java.util.ArrayList;
 @WebServlet("/StudentRegisterServlet")
 public class StudentRegisterServlet extends HttpServlet {
 
-//	TEST TO SEE IF THE SQL WORKS
-	public static void main(String[] args){
-		System.out.println("Is this working");
-		String username = "aagamv31@gmail.com";
-		String password = "1234";
-		String first_name = "Aagam";
-		String last_name = "Vadecha";
-		String confirmpw = "1234";
-		if(confirmpw.equals(password)) {
-			System.out.println("GETS HERE");
-			if (UserManager.register(username, password, first_name, last_name, 1)) {
-				ArrayList<String> temp = UserManager.login(username, password,1);
-				System.out.println("id: " + temp.get(0) + "\nfName: " + temp.get(3) + "\nlName: " + temp.get(4) + "\nusername: " + temp.get(1)
-						+ "\npassword: " + temp.get(2) + "\nStrikes: " + temp.get(5));
-			}
-			else {
-				System.out.println("Registration failed bc user probably already exists");
-			}
-		}
-		else {
-			System.out.println("passwords don't match");
-		}
-
-	}
+////	TEST TO SEE IF THE SQL WORKS
+//	public static void main(String[] args){
+//		System.out.println("Is this working");
+//		String username = "aagamv3122@gmail.com";
+//		String password = "1234";
+//		String first_name = "Aagam";
+//		String last_name = "Vadecha";
+//		String confirmpw = "1234";
+//		if(confirmpw.equals(password)) {
+//			System.out.println("GETS HERE");
+//			if (UserManager.register(username, password, first_name, last_name, 2)) {
+//				ArrayList<String> temp = UserManager.login(username, password,2);
+//				System.out.println("id: " + temp.get(0) + "\nfName: " + temp.get(3) + "\nlName: " + temp.get(4) + "\nusername: " + temp.get(1)
+//						+ "\npassword: " + temp.get(2));
+//			}
+//			else {
+//				System.out.println("Registration failed bc user probably already exists");
+//			}
+//		}
+//		else {
+//			System.out.println("passwords don't match");
+//		}
+//
+//	}
 
 	private static final long serialVersionUID = 1L;
 	protected void service (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
