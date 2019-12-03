@@ -18,7 +18,6 @@
 		errorMsg = (String)request.getAttribute("error");
 	}
   	%>
-  	%>
 </head>
 <body>
     <div class="wrapper fadeInDown">
