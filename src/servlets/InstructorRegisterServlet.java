@@ -39,17 +39,17 @@ public class InstructorRegisterServlet extends HttpServlet {
 					session.setAttribute("hashedPassword", temp.get(2));
 				} else {
 					next = "/InstructorRegister.jsp";
-					session.setAttribute("error", "Username already exists in our database, please use another email.");
+					request.setAttribute("error", "Username already exists in our database, please use another email.");
 					//TODO - username already exists in db
 				}
 			} else {
 				next = "/InstructorRegister.jsp";
-				session.setAttribute("error", "Unfortunately, either your password field is blank or your confirmation password and actual password are not the same.");
+				request.setAttribute("error", "Unfortunately, either your password field is blank or your confirmation password and actual password are not the same.");
 				//TODO - password doesn't match
 			}
 		}else {
 			next = "/InstructorRegister.jsp";
-			session.setAttribute("error","Your username is not an email. Please enter an email in the username field.");
+			request.setAttribute("error","Your username is not an email. Please enter an email in the username field.");
 			//TODO - username is not an email
 		}
 		RequestDispatcher dispatch = getServletContext().getRequestDispatcher(next);
