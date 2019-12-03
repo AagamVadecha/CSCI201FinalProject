@@ -12,7 +12,7 @@ GuestServlet.DisplayCalendar(courseName);
 <head>
 <meta charset="UTF-8">
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="GuestCalendar2.css" />
+<link rel="stylesheet" type="text/css" href="GuestCalendar.css" />
 <link rel="icon" href="cheesecake.png" type="image/png" sizes="16x16">
 <title>Guest Calendar</title>
 </head>
