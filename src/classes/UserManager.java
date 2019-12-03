@@ -1,9 +1,52 @@
 package classes;
+import org.apache.commons.codec.binary.Base64;
 
+import javax.crypto.SecretKey;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
+import java.security.SecureRandom;
 import java.sql.*;
 import java.util.ArrayList;
 
 public class UserManager {
+    // The higher the number of iterations the more
+    // expensive computing the hash is for us and
+    // also for an attacker.
+    private static final int iterations = 20*1000;
+    private static final int saltLen = 32;
+    private static final int desiredKeyLen = 256;
+
+    /** Computes a salted PBKDF2 hash of given plaintext password
+     suitable for storing in a database.
+     Empty passwords are not supported. */
+    public static String getSaltedHash(String password) throws Exception {
+        byte[] salt = SecureRandom.getInstance("SHA1PRNG").generateSeed(saltLen);
+        // store the salt with the password
+        return Base64.encodeBase64String(salt) + "$" + hash(password, salt);
+    }
+
+    /** Checks whether given plaintext password corresponds
+     to a stored salted hash of the password. */
+    public static boolean check(String password, String stored) throws Exception{
+        String[] saltAndHash = stored.split("\\$");
+        if (saltAndHash.length != 2) {
+            throw new IllegalStateException(
+                    "The stored password must have the form 'salt$hash'");
+        }
+        String hashOfInput = hash(password, Base64.decodeBase64(saltAndHash[0]));
+        return hashOfInput.equals(saltAndHash[1]);
+    }
+
+    // using PBKDF2 from Sun, an alternative is https://github.com/wg/scrypt
+    // cf. http://www.unlimitednovelty.com/2012/03/dont-use-bcrypt.html
+    private static String hash(String password, byte[] salt) throws Exception {
+        if (password == null || password.length() == 0)
+            throw new IllegalArgumentException("Empty passwords are not supported.");
+        SecretKeyFactory f = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+        SecretKey key = f.generateSecret(new PBEKeySpec(
+                password.toCharArray(), salt, iterations, desiredKeyLen));
+        return Base64.encodeBase64String(key.getEncoded());
+    }
 
     static String sql  = "jdbc:mysql://google/OHScheduler?cloudSqlInstance=tough-shard-260720:us-west1:csci201final&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false";
 
@@ -65,7 +108,7 @@ public class UserManager {
                 statement = "INSERT INTO student(username,password,fName,lName,strike) VALUES(?,?,?,?,?)";
             ps = conn.prepareStatement(statement);
             ps.setString(1, username);
-            ps.setString(2, password);
+            ps.setString(2, getSaltedHash(password));
             ps.setString(3, fname);
             ps.setString(4, lname);
             if (id==1) {
@@ -78,6 +121,8 @@ public class UserManager {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
             return false;
+        } catch (Exception e) {
+            e.printStackTrace();
         } finally {
             try {
                 if (ps != null) {
@@ -112,7 +157,7 @@ public class UserManager {
                 statement =  "SELECT * FROM student where username = ?  AND password = ?";
             ps = conn.prepareStatement(statement); // prepare statement
             ps.setString(1, username);
-            ps.setString(2,password);
+            ps.setString(2,getSaltedHash(password));
             rs = ps.executeQuery(); // execute query, return result set
             if(!rs.next()) {
                 if (rs != null) {
@@ -132,6 +177,8 @@ public class UserManager {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
             return false;
+        } catch (Exception e) {
+            e.printStackTrace();
         } finally {
             try {
                 if (rs != null) {
@@ -169,7 +216,7 @@ public class UserManager {
                     statement =  "SELECT * FROM student where username = ?  AND password = ?";
                 ps = conn.prepareStatement(statement); // prepare statement
                 ps.setString(1, username);
-                ps.setString(2,password);
+                ps.setString(2,getSaltedHash(password));
                 rs = ps.executeQuery(); // execute query, return result set
                 if(rs.next()){
                     ans.add(Integer.toString(rs.getInt(1)));
@@ -183,6 +230,8 @@ public class UserManager {
             } catch (SQLException sqle) {
                 System.out.println(sqle.getMessage());
             } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
                 e.printStackTrace();
             } finally {
                 try {
