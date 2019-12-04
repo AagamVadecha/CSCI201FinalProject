@@ -16,15 +16,6 @@
 </head>
 <body>
 <p id = "Instructor" class="solid">Instructor</p>
-<p id = "CoursesLabel" class="solid">Your Courses</p>
-Courses listed here
-<% for (int i = 0; i <instructor_course_list.size(); i++){
-    String instructor_course = instructor_course_list.get(i); 
-    System.out.println(instructor_course);
-%>
-    <a href="InstructorCalendar.jsp" style="color: #990000; text-decoration: none;"><button> <%=instructor_course%></button></a> <!-- please fix this to create a form and submit to SetCourseID -->
-<%
-}%>
  
 <div id = "newcourse">
         <form action="CreateCourse">
@@ -32,9 +23,6 @@ Courses listed here
             <input type="submit" id="submit_newcourse" value="Add New Course">
         </form>
 </div> 
-<button class="button"> 
-<a href="InstructorFullSchedule.jsp" style="color: #990000; text-decoration: none;">Your Schedule</a>
-</button>
 
 <p id="signout">
 <a href="SignOutServlet" style="color: #990000; text-decoration: none;"> Sign Out</a>
