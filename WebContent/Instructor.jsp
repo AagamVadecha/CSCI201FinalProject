@@ -37,7 +37,7 @@ Courses listed here
 </button>
 
 <p id="signout">
-<a href="servlet" style="color: #990000; text-decoration: none;"> Sign Out</a>
+<a href="SignOutServlet" style="color: #990000; text-decoration: none;"> Sign Out</a>
 </p>
 
 <h1>Select a course</h1>
