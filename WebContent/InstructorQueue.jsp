@@ -57,10 +57,11 @@ function updateQueue(){
 </head>
 <body>
 <h1>Instructor <%= courseName %> Office Hour Queue</h1>
-
+<%//queue entries are in divs with style class "queueEntry" %>
 <div id="queueInfo"> </div>
 
-<div id = "finishStudent">
+<div class="queueButton">
+<div id = "finishStudent" >
 	<button type='button' onclick='nextStudent()'  style="color: #990000; text-decoration: none;" >Next Student</button>
 </div> 
 
@@ -79,6 +80,8 @@ function updateQueue(){
 			<input type="submit" id="submit_button" value="End Office Hour"  style="color: #990000; text-decoration: none;" >
 		</form>
 </div> 
+</div>
+
 
 <p id="signout">
 <a href="SignOutServlet" style="color: #990000; text-decoration: none; text-align: center;" >Sign Out</a>
