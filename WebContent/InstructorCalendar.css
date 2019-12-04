@@ -1,87 +1,91 @@
 @charset "UTF-8";
-body 
-{
-   background-color: #990000;
-   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
-   text-decoration: none;
+
+body {
+	background-color: #990000;
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light",
+		"Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	text-decoration: none;
 }
-#header{
-	border-style: solid; 
-    border-color:white;
-    height:100px;
+
+#header {
+	border-style: solid;
+	border-color: white;
+	height: 100px;
 }
-.allButtons{
+
+.allButtons {
 	background-color: #FFCC00;
-	color:#990000;
-	font-size:20px;
-	font-weight:bold;
-	text-align:center;
-	text-decoration:none;
+	color: #990000;
+	font-size: 20px;
+	font-weight: bold;
+	text-align: center;
+	text-decoration: none;
 	padding: 15px 15px;
 }
-.allTitles{
-	border-style: solid;
-    border-radius: 3px;
-    border-color: #FFCC00;
-    color: #FFCC00;
-    border-width: 5px;
-    text-align: center;
-    font-size:30px;
-    font-weight:bold;
-}
-h1 {
-    margin-top: 50px;
-}
-#buttons{
-    border-style:solid;
-    border-color:yellow;
-    margin-top:15px;
-    height: 60px;
-}
-#start{
-    display:inline-block;
-    float:left; 
-}
-#signout
-{
-    float:left;
-    margin-left:1000px;
-    margin-top:15px;
-}
-#content{
-	border-style:solid;
-	border-color:yellow;
-	margin-top:15px; 
-	height:500px;
-}
-#hours {
-	border-style: solid; 
-    border-color:white; 
-	display:inline-block;
-	float:left;
-	height: 250px; 
-	width: 450px; 
-	margin-right:200px;
-	margin-top: 20px;
-}
 
-#hoursForm{
-	color:#FFCC00;
-	font-size:20px;
+.allTitles {
+	border-style: solid;
+	border-radius: 3px;
+	border-color: #FFCC00;
+	color: #FFCC00;
+	border-width: 5px;
+	text-align: center;
+	font-size: 30px;
 	font-weight: bold;
 }
-#submitButton{
-	margin:auto;
-	display:block;
+
+h1 {
+	margin-top: 50px;
 }
 
-#officeHoursList{
-	border-style: solid; 
-	border-color:white;
+#buttons {
+	border-style: solid;
+	border-color: yellow;
+	margin-top: 15px;
+	height: 60px;
+}
+
+#start {
 	display: inline-block;
-	height:250px; 
-	width: 350px; 
+	float: left;
+}
+
+#signout {
+	float: left;
+	margin-left: 1000px;
+	margin-top: 15px;
+}
+
+#hours {
+	border-style: solid;
+	border-color: white;
+	height: 250px;
+	margin-right: 200px;
+	margin-top: 20px;
+	width:100%;
+}
+
+#hoursForm {
 	color: #FFCC00;
-	font-size:20px; 
+	font-size: 20px;
+	font-weight: bold;
+	margin-left:500px;
+}
+
+#submitButton {
+	background-color: #FFCC00;
+    color: #990000;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    padding: 15px 15px;
+}
+
+#officeHoursList {
+	border-style: solid;
+	border-color: white;
+	color: #FFCC00;
+	font-size: 20px;
 	margin-top: 20px;
 }
