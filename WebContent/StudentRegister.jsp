@@ -2,10 +2,26 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
+<style>
+.usc_logo
+{
+	display: block;
+	margin-top: 90px;
+  	margin-left: auto;
+ 	margin-right: auto;
+}
+#formContent
+{
+	margin-top: 50px;
+	margin-left: auto;
+ 	margin-right: auto;
+	
+}
+</style>
 <head>
-	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
 	<link rel="stylesheet" href="User.css">
 	<meta charset="ISO-8859-1">
 	<title>Student Register</title>
@@ -39,9 +55,12 @@
       <label for="confirmpassword" style="color: #FFCC00">Confirm Password</label>
       <input type="password" id="confirmpw" class="fadeIn third" name="confirmpassword">
       <input type="submit" class="fadeIn fourth" value="Register">
-        <%= errorMsg %>
     </form>
+       <p style="color: #FFCC00" align="center"> <%= errorMsg %> </p>
   </div>
+</div>
+<div>
+	<img src="trojans.png" alt="usc" class="usc_logo" width = "500" height = "500" >
 </div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
