@@ -62,29 +62,28 @@ function updateQueue(){
 
 <div class="queueButton">
 <div id = "finishStudent" >
-	<button type='button' onclick='nextStudent()'  style="color: #990000; text-decoration: none;" >Next Student</button>
+	<button id='button' type='button' onclick='nextStudent()' style="margin-left : 880px; margin-top : 25px; background-color: #FFCC00; border: 0.5px; border-radius: 3px; width : 150px; height : 40px; color: #990000; text-decoration: none; font-weight: bold; font-size: 20px;" >Next Student</button>
 </div> 
 
 
 <div id = "noShow">
-		<button type='button' onclick='noShow()'  style="color: #990000; text-decoration: none;" >Student Not Showing Up</button>
+		<button id='button' type='button' onclick='noShow()'  style="margin-left : 880px; margin-top : 25px; background-color: #FFCC00; border: 0.5px; border-radius: 3px; width : 150px; height : 60px; color: #990000; text-decoration: none; font-weight: bold; font-size: 20px;" >Student Not Showing Up</button>
 </div> 
 
 
 <div id = "update">
-		<button type='button' onclick='updateQueue()'  style="color: #990000; text-decoration: none;" >Update Page</button>
+		<button id='button' type='button' onclick='updateQueue()'  style="margin-left : 880px; margin-top : 25px; background-color: #FFCC00; border: 0.5px; border-radius: 3px; width : 150px; height : 40px; color: #990000; text-decoration: none; font-weight: bold; font-size: 20px;" >Update Page</button>
 </div> 
 
 <div id = "end">
 		<form action="EndQueueServlet">
-			<input type="submit" id="submit_button" value="End Office Hour"  style="color: #990000; text-decoration: none;" >
+			<input type="submit" value="End Office Hour"  style="margin-left : 880px; margin-top : 25px; background-color: #FFCC00; border: 0.5px; border-radius: 3px; width : 170px; height : 40px; color: #990000; text-decoration: none; font-weight: bold; font-size: 20px;">
 		</form>
 </div> 
 </div>
 
-
 <p id="signout">
-<a href="SignOutServlet" style="color: #990000; text-decoration: none; text-align: center;" >Sign Out</a>
+<a href="SignOutServlet" style="color: #990000; text-decoration: none;" > Sign Out</a>
 </p>
 </body>
 </html>
