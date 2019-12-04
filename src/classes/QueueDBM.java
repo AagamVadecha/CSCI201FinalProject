@@ -142,7 +142,7 @@ public class QueueDBM {
 				while (rs.next()) {
 					username = rs.getString("username");
 				}
-				queue += i + ":" + username + ":" + text + "\n";
+				queue +="<div class='queueEntry'>" + username + ":" + text + "</div>\n";
 				i++;
 			}
 		} catch (SQLException sqle) {
