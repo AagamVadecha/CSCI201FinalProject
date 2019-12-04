@@ -117,6 +117,8 @@ public class QueueDBM {
 	// 0:username:text\n
 	public static String selectQueue(int courseID) {
 		String queue = "";
+		String queue1="";
+		String queue2="";
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -142,7 +144,8 @@ public class QueueDBM {
 				while (rs.next()) {
 					username = rs.getString("username");
 				}
-				queue +="<div class='queueEntry'>" + username + ":" + text + "</div>\n";
+				queue1 +="<td>" + username +"</td>";
+				queue2 += "<td>" + text + "</td>";
 				i++;
 			}
 		} catch (SQLException sqle) {
@@ -164,7 +167,10 @@ public class QueueDBM {
 				System.out.println(sqle.getMessage());
 			}
 		}
-
+		queue1="<tr>"+queue1+"</tr>";
+		queue2="<tr>"+queue2+"</tr>";
+		queue= "<table border=\'1\' style=\'border-color: #990000; border-style: hidden; font-size: 20px; color: #990000; background-color: #FFCC00;\'>\r\n"+"<tr><th>Student Email</th><th>Student Text</th></tr>"+queue1+queue2+"</table>";
+		
 		return queue;
 	}
 
