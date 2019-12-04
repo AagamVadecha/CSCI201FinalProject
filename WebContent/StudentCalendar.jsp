@@ -1,12 +1,11 @@
 <%
 	int queueNumber = GuestServlet.getQueue();
 	
-	//String courseName = (String)session.getAttribute("courseName");
-	// int courseID = (int) session.getAttribute("courseID"); 
-	String courseName = "CSCI 201";
-	int courseID = 1; 
-	System.out.println("course name: " + courseName);
-	ArrayList<String> courseOH = CourseManager.getOfficeHoursCourse(courseID);
+	String courseName = (String)session.getAttribute("courseName");
+    int courseID = (int) session.getAttribute("courseID");
+    System.out.println("course name: " + courseName);
+    ArrayList<String> courseOH = CourseManager.getOfficeHoursCourse(courseID); 
+    
 	System.out.println("number of office hours: " + courseOH.size());
 	// TODO - PARSE courseOH AND DISPLAY COURSES
 %>
@@ -21,15 +20,37 @@
 	<title>Student Calendar</title>
 </head>
 <body>
-	<h1>Student <%= courseName %> Calendar</h1>
-	<p id = "QueueNumber" class="solid">Number of People in Queue #  <%= queueNumber %></p>
-	<p id="signout">
-	   <a href="servlet" style="color: #990000; text-decoration: none;" > Sign Out</a>
-	</p>
-	<p id="checkQueue">
-	   <a href="CheckQueueServlet" style="color: #990000; text-decoration: none;" > Check Queue Detail</a>
-	</p>
+	<div id = "header">
+        <h1 class="allTitles"><%=courseName %> Calendar</h1>
+    </div>
+    
+    <div id="signout">
+           <a id="signOutButton" href="SignOutServlet" >Sign Out</a>
+    </div>
+    
+    <div id="queueButtons">
+        <p class="allTitles">Queue Information</p>
+		<div id = "queueNumber" >
+		  Number of People in Queue #  <%=queueNumber%> <!-- TODO? -->
+		</div>
+		
+		<div id="checkQueue">
+		   <a href="CheckQueueServlet" class="allButtons" >Check Queue Details</a>
+		</div>
+    </div>
 
-
+	<div id="officeHoursList">
+		<p class="allTitles">
+			Office Hours for
+			<%=courseName%>
+		</p>
+		<table id="OHTable">
+			<% for(int i = 0; i < courseOH.size(); ++i){ %>
+			<tr>
+				<%=courseOH.get(i)%>
+			</tr>
+			<% } %>
+		</table>
+	</div>
 </body>
 </html>
