@@ -5,17 +5,90 @@ body
    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
    text-decoration: none;
 }
-h1 {
-	border-style: solid;
-	border-radius: 3px;
+#header{
+    border-style: solid; 
+    border-color:white;
+    height:100px;
+}
+.allButtons{
+    background-color: #FFCC00;
+    color:#990000;
+    font-size:20px;
+    font-weight:bold;
+    text-align:center;
+    text-decoration:none;
+    padding: 15px 15px;
+}
+.allTitles{
+    border-style: solid;
+    border-radius: 3px;
     border-color: #FFCC00;
     color: #FFCC00;
     border-width: 5px;
-    width: 30%;
     text-align: center;
+    font-size:30px;
+    font-weight:bold;
+}
+h1 {
     margin-top: 50px;
 }
+#signout
+{
+    border-style:solid;
+    border-color:white;
+    margin-top:15px;
+    height:60px;
+}
+#signOutButton{
+	background-color: #FFCC00;
+    color:#990000;
+    font-size:20px;
+    font-weight:bold;
+    text-align:center;
+    text-decoration:none;
+    padding: 15px 15px;
+    float:left;
+    margin-left:1240px;
+}
+#queueButtons{
+	border-style: solid;
+	border-color:white;
+	margin-top:15px;
+	height:350px;
+}
+#queueNumber{
+    background-color: #FFCC00;
+    border-radius: 3px;
+    width: 300px;
+    height: 70px;
+    color: #990000;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    float:left;
 
+}
+#checkQueue{
+    float:left;
+    margin-left:250px;
+}
+#officeHoursList{
+    border-style: solid; 
+    border-color:white;
+    display: inline-block;
+    height:250px; 
+    width: 350px; 
+    color: #FFCC00;
+    font-size:20px; 
+    margin-top: 20px;
+}
+
+
+
+
+
+
+/* TODO: */
 #join
 {
 	  background-color: #FFCC00;
@@ -40,33 +113,6 @@ h1 {
 	  font-weight: bold;
 
 }
-
-#QueueNumber
-{	  background-color: #FFCC00;
-	  border-radius: 3px;
-	  width: 300px;
-	  height: 90px;
-	  color: #990000;
-	  margin-top: -110px;
-	  margin-left: 500px;
-	  text-align: center;
-	  font-size: 20px;
-	  font-weight: bold;
-}
-
-#signout
-{
-	  background-color: #FFCC00;
-	  width: 130px;
-	  height: 30px;
-	  margin-top: -100px;
-	  margin-left: 1200px;
-	  text-align: center;
-	  font-size: 20px;
-	  font-weight: bold;
-	  
-}
-
 #commentbox
 {
 	background-color: #FFCC00;
@@ -76,18 +122,7 @@ h1 {
 	font-size: 15px;
 }
 
-#checkQueue
-{
-	  margin-top: 100px;
-	  background-color: #FFCC00;
-	  border-radius: 3px;
-	  width: 160px;
-	  height: 30px;
-	  color: #990000;
-	  text-align: center;
-	  font-size: 16px;
-	  font-weight: bold;
-}
+
 #submit_button
 {
 	  background-color: #FFCC00;
