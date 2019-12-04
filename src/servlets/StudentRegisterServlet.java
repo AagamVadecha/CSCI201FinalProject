@@ -83,13 +83,7 @@ public class StudentRegisterServlet extends HttpServlet {
 			request.setAttribute("error","Your username is not an email. Please enter an email in the username field.");
 			//TODO - username is not an email
 		}
-		RequestDispatcher dispatch = getServletContext().getRequestDispatcher(next);
-
-		try {
-		    dispatch.forward(request, response);
-		} catch(IOException | ServletException e) {
-		    e.printStackTrace();
-		}
+	
 		// TODO - ERROR MESSAGE
 	}
 }
