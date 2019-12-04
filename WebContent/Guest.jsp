@@ -1,10 +1,12 @@
-<%
-session.setAttribute("nextPage", "/GuestCalendar.jsp");
 
-ArrayList <String> course_list = GuestServlet.getCourses();    
+<%
+    session.setAttribute("nextPage", "/GuestCalendar.jsp");
+
+    ArrayList<String> course_list = CourseManager.getAllCourses();
 %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.ArrayList" import="servlets.GuestServlet"%>
+	pageEncoding="UTF-8" import="java.util.ArrayList"
+	import="servlets.GuestServlet" import="classes.CourseManager"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,22 +16,22 @@ ArrayList <String> course_list = GuestServlet.getCourses();
 <title>Guest</title>
 </head>
 <body>
-<p id = "Guest" class="solid">Guest</p>
-<h1>Select a course</h1>
-<form id="dropdown" method="GET" action="GuestServlet">  
-  <select id="drop" name="course_list">
-    <option value="choose">Select Course</option>
-    
- <% for (int i = 0; i < course_list.size(); i++)
- {
-	 String course = course_list.get(i);
-%>
- <option  value="<%= course %>"> <%= course %></option>
-<% 
- }%>
-  </select>
-  <br><br>
-  <input id = "submit_button" type="submit">
-</form>
+	<p id="Guest" class="solid">Guest</p>
+	<h1>Select a course</h1>
+	<form id="dropdown" method="GET" action="SetCourseIDGuest">
+		<select id="drop" name="course_list">
+			<option value="choose">Select Course</option>
+
+			<%
+			    for (int i = 0; i < course_list.size(); i++) {
+			        String course = course_list.get(i);
+			%>
+			<option value="<%=course%>"> <%=course%></option>
+			<%
+			    }
+			%>
+		</select> <br>
+		<br> <input id="submit_button" type="submit">
+	</form>
 </body>
 </html>
